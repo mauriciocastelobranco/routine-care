@@ -10,9 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_08_155245) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_08_180117) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "patient_id", null: false
+    t.string "title"
+    t.date "occurs_at"
+    t.string "specialty"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_appointments_on_patient_id"
+  end
+
+  create_table "caregivers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_caregivers_on_user_id"
+  end
+
+  create_table "cares", force: :cascade do |t|
+    t.bigint "patient_id", null: false
+    t.bigint "caregiver_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["caregiver_id"], name: "index_cares_on_caregiver_id"
+    t.index ["patient_id"], name: "index_cares_on_patient_id"
+  end
+
+  create_table "medications", force: :cascade do |t|
+    t.string "name"
+    t.bigint "patient_id", null: false
+    t.string "dosage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_medications_on_patient_id"
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.date "birth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_patients_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,4 +71,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_08_155245) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appointments", "patients"
+  add_foreign_key "caregivers", "users"
+  add_foreign_key "cares", "caregivers"
+  add_foreign_key "cares", "patients"
+  add_foreign_key "medications", "patients"
+  add_foreign_key "patients", "users"
 end
