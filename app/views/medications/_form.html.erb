@@ -1,0 +1,20 @@
+<%= form_with model: [@patient, @medication] do |f| %>
+  <div>
+    <%= f.label :name, "Nome da medicação" %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :dosage, "Dosagem" %><br>
+    <%= f.text_field :dosage %>
+  </div>
+
+  <div>
+    <%= f.label :frequency, "Frequência" %><br>
+    <%= f.text_field :frequency %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

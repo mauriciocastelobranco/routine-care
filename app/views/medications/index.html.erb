@@ -1,0 +1,31 @@
+<h1>Medicações</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Dosagem</th>
+      <th>Frequência</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @medications.each do |medication| %>
+      <tr>
+        <td><%= medication.name %></td>
+        <td><%= medication.dosage %></td>
+        <td><%= medication.frequency %></td>
+        <td>
+          <%= link_to "Editar", edit_patient_medication_path(@patient, medication) %> |
+          <%= link_to "Excluir", patient_medication_path(@patient, medication),
+                      data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to "Nova medicação", new_patient_medication_path(@patient) %>
+</p>
