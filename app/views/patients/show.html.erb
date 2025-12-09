@@ -1,0 +1,19 @@
+<div>
+  <h1><% @patient.name %></h1>
+
+
+    <% @patient.appointments.each do |appointment| %>
+      <div>
+        <%= appointment.title %>
+        <%= appointment.occurs_at %>
+        <%= appointment.notes %>
+      </div>
+    <% end %>
+
+    <% @patient.medications.each do |medication| %>
+      <div>
+        <%= medication.name %>
+        <%= medication.dosage %>
+      </div>
+    <% end %>
+</div>
