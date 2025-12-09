@@ -43,7 +43,7 @@ m6 = Medication.create!(
 
 a1 = Appointment.create!(
   title: "Consulta com Dr. Rodrigo",
-  occurs_at: "23/12/25",
+  occurs_at: "2025/12/23",
   specialty: "Oftalmologia",
   notes: "To cego, enxergo mais nada",
   patient_id: enzo.id
@@ -51,7 +51,7 @@ a1 = Appointment.create!(
 
 a2 = Appointment.create!(
   title: "Limpeza e Check-up",
-  occurs_at: "15/01/26",
+  occurs_at: "2026/01/15",
   specialty: "Odontologia",
   notes: "Siso tá doendo demais, socorro",
   patient_id: joao.id
@@ -59,7 +59,7 @@ a2 = Appointment.create!(
 
 a3 = Appointment.create!(
   title: "Retorno Cardiologista",
-  occurs_at: "10/02/26",
+  occurs_at: "2026/02/10",
   specialty: "Cardiologia",
   notes: "Coração acelerado depois de tomar muito café codando",
   patient_id: maria.id
@@ -67,7 +67,7 @@ a3 = Appointment.create!(
 
 a4 = Appointment.create!(
   title: "Avaliação Joelho",
-  occurs_at: "05/03/26",
+  occurs_at: "2026/03/05",
   specialty: "Ortopedia",
   notes: "Joguei bola no fim de semana e travei o joelho",
   patient_id: joao.id
@@ -75,7 +75,7 @@ a4 = Appointment.create!(
 
 a5 = Appointment.create!(
   title: "Consulta Nutricionista",
-  occurs_at: "20/01/26",
+  occurs_at: "2026/01/20",
   specialty: "Nutrição",
   notes: "Preciso de uma dieta urgente, comi demais no Natal",
   patient_id: maria.id
@@ -83,7 +83,7 @@ a5 = Appointment.create!(
 
 a6 = Appointment.create!(
   title: "Exame de Alergia",
-  occurs_at: "12/04/26",
+  occurs_at: "2026/04/12",
   specialty: "Dermatologia",
   notes: "Apareceram umas manchas vermelhas depois da praia",
   patient_id: enzo.id
