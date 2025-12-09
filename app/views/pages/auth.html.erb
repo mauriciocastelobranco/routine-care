@@ -1,0 +1,35 @@
+<div class="min-h-screen d-flex justify-content-center align-items-center bg-light">
+  <div class="card shadow p-4" style="max-width: 420px; width: 100%;">
+    <div class="text-center mb-4">
+      <h1 class="h4 mb-1">Routine Care</h1>
+      <p class="text-muted mb-0">Acesse sua conta para continuar</p>
+    </div>
+
+    <%= form_with url: "#", method: :post, local: true do |f| %>
+      <div class="mb-3">
+        <%= f.label :email, "E-mail", class: "form-label" %>
+        <%= f.email_field :email, class: "form-control", placeholder: "seuemail@exemplo.com" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password, "Senha", class: "form-label" %>
+        <%= f.password_field :password, class: "form-control", placeholder: "••••••••" %>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="form-check">
+          <%= f.check_box :remember_me, class: "form-check-input", id: "remember_me" %>
+          <%= f.label :remember_me, "Lembrar de mim", class: "form-check-label" %>
+        </div>
+        <a href="#" class="small text-muted">Esqueci minha senha</a>
+      </div>
+
+      <%= f.submit "Entrar", class: "btn btn-success w-100 mb-3" %>
+    <% end %>
+
+    <p class="text-center text-muted small mb-0">
+      Não tem conta?
+      <a href="#" class="text-success text-decoration-none">Criar conta</a>
+    </p>
+  </div>
+</div>
