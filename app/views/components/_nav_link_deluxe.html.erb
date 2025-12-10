@@ -1,0 +1,37 @@
+<%# app/views/components/_nav_link_deluxe.html.erb %>
+<%# Locals:
+#  label:        String  (ex: "Pacientes")
+#  path:         Route   (ex: patients_path)
+#  icon_emoji:   String  (ex: "👥")
+#  icon_image:   String  (ex: "ui/patients.png")
+%>
+
+<%
+  is_active = current_page?(path)
+
+  wrapper_classes = ["rc-nav-link-deluxe"]
+  wrapper_classes << "rc-nav-link-deluxe--active" if is_active
+
+  icon_image  = local_assigns[:icon_image]
+  icon_emoji  = local_assigns[:icon_emoji]
+%>
+
+<%= link_to path, class: wrapper_classes.join(" ") do %>
+  <div class="rc-nav-link-deluxe__icon">
+    <% if icon_image.present? %>
+      <%= image_tag icon_image,
+                    alt: label,
+                    style: "width: 22px; height: 22px; object-fit: contain;" %>
+    <% elsif icon_emoji.present? %>
+      <span><%= icon_emoji %></span>
+    <% else %>
+      <span>⭐</span>
+    <% end %>
+  </div>
+
+  <span class="small fw-semibold">
+    <%= label %>
+  </span>
+
+  <div class="rc-nav-link-deluxe__indicator <%= 'rc-nav-link-deluxe__indicator--active' if is_active %>"></div>
+<% end %>

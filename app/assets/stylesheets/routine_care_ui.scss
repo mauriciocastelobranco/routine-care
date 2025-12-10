@@ -1,0 +1,156 @@
+/* ==== SHELL (FUNDO) - DARK MODE READY ==== */
+.rc-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+}
+
+/* Se quiser uma versão clara, usa rc-shell--light em vez de rc-shell */
+.rc-shell--light {
+  background: radial-gradient(circle at top, #e5f0ff 0, #f9fafb 60%, #e5e7eb 100%);
+}
+
+/* ==== NAVBAR DELUXE COM GLASSMORPHISM ==== */
+.rc-bottom-nav-glass {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  width: 90%;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.88); /* vidro escuro */
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 40;
+}
+
+/* ==== NAV LINK DELUXE (TABS iOS STYLE) ==== */
+.rc-nav-link-deluxe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  gap: 0.15rem;
+  padding: 0.1rem 0.25rem;
+  color: #e5e7eb;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  transition: all 0.22s ease;
+  position: relative;
+}
+
+.rc-nav-link-deluxe__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s ease;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.7);
+}
+
+.rc-nav-link-deluxe__icon span {
+  font-size: 18px;
+}
+
+/* Active (tab selecionada) */
+.rc-nav-link-deluxe--active {
+  color: #bbf7d0; /* verde clarinho */
+  transform: translateY(-3px);
+}
+
+.rc-nav-link-deluxe--active .rc-nav-link-deluxe__icon {
+  background: radial-gradient(circle at top, rgba(74, 222, 128, 0.4), rgba(22, 101, 52, 0.8));
+  box-shadow:
+    0 0 0 1px rgba(74, 222, 128, 0.6),
+    0 10px 25px rgba(34, 197, 94, 0.7);
+}
+
+/* pseudo underline / glow – tab animada estilo iOS */
+.rc-nav-link-deluxe__indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 3px;
+  border-radius: 999px;
+  background: transparent;
+  opacity: 0;
+  transition: all 0.22s ease;
+}
+
+.rc-nav-link-deluxe__indicator--active {
+  opacity: 1;
+  background: linear-gradient(90deg, #4ade80, #a3e635);
+}
+
+/* Hover geral */
+.rc-nav-link-deluxe:hover {
+  color: #f9fafb;
+  transform: translateY(-1px);
+}
+
+.rc-nav-link-deluxe:hover .rc-nav-link-deluxe__icon {
+  box-shadow:
+    0 0 0 1px rgba(148, 163, 184, 0.7),
+    0 10px 25px rgba(15, 23, 42, 0.9);
+}
+
+/* ==== FLOATING ACTION BUTTON (FAB) DE MILHÕES ==== */
+.rc-fab {
+  position: absolute;
+  left: 50%;
+  bottom: 64px; /* fica um pouco acima da navbar */
+  transform: translateX(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22c55e, #a3e635);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-size: 26px;
+  box-shadow:
+    0 18px 35px rgba(34, 197, 94, 0.8),
+    0 0 0 1px rgba(22, 163, 74, 0.7);
+  z-index: 45;
+  transition: transform 0.18s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+.rc-fab:hover {
+  transform: translateX(-50%) translateY(-2px) scale(1.03);
+  filter: brightness(1.05);
+}
+
+.rc-fab:active {
+  transform: translateX(-50%) translateY(1px) scale(0.97);
+  box-shadow:
+    0 10px 20px rgba(22, 163, 74, 0.7),
+    0 0 0 1px rgba(21, 128, 61, 0.9);
+}
+
+.routinecare-logo {
+  width: 64px;
+  height: 64px;
+  display: block;
+}
+
+.routinecare-logo-sm {
+  width: 40px;
+  height: 40px;
+}
