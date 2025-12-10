@@ -13,4 +13,8 @@ Rails.application.routes.draw do
     resources :medications, only: ["create", "show"]
     resources :appointments, only: ["create", "show"]
   end
+
+  namespace :caregiver do
+    resources :patients, only: [:index, :show]
+  end
 end

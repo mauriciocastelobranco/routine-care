@@ -1,3 +1,19 @@
-<% @patients.each do |patient| %>
-  <h3><%= link_to patient.name, patient_path(patient) %></h3>
-<% end %>
+<%= link_to "⬅ Voltar ao início", root_path, class: "btn btn-link" %>
+
+<h1>Pacientes (Admin)</h1>
+
+<div class="actions">
+  <!-- Por enquanto não faz nada além de ficar na mesma página -->
+  <%= link_to "Adicionar paciente", "#", class: "btn btn-success" %>
+</div>
+
+<ul>
+  <% @patients.each do |patient| %>
+    <li>
+      <%= link_to patient.name, patient_path(patient) %>
+
+      <!-- Botão de excluir (placeholder por enquanto) -->
+      <%= link_to "Excluir", "#", class: "btn btn-sm btn-outline-danger" %>
+    </li>
+  <% end %>
+</ul>

@@ -1,2 +1,7 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="role-selection">
+  <h1>Como você deseja acessar?</h1>
+
+  <%= link_to "Sou Familiar (Admin)", patients_path, class: "btn btn-primary" %>
+
+  <%= link_to "Sou Cuidador", caregiver_patients_path, class: "btn btn-secondary" %>
+</div>
