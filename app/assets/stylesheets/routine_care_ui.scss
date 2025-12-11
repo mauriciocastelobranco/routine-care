@@ -154,3 +154,342 @@
   width: 40px;
   height: 40px;
 }
+
+/* Shell background (desktop) */
+.rc-iphone-shell {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #F0F4FF, #FFFFFF);
+}
+
+/* iPhone 16 Pro Max frame */
+.rc-iphone-16pm-frame {
+  width: 440px;
+  height: 956px;
+  border-radius: 52px;
+  background: #ffffff;
+  border: 10px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+.rc-16pm-dynamic-island {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 132px;
+  height: 38px;
+  background: #000;
+  border-radius: 999px;
+  z-index: 30;
+}
+.rc-16pm-status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  z-index: 15;
+}
+
+.rc-status-time {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111;
+}
+
+.rc-status-icon {
+  width: 18px;
+  height: 18px;
+  color: #111;
+}
+.rc-16pm-content {
+  width: 100%;
+  height: 100%;
+  padding-top: 54px;
+  padding-bottom: 45px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.rc-16pm-home-indicator {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 999px;
+  z-index: 40;
+}
+@media (max-width: 500px) {
+  .rc-iphone-16pm-frame {
+    width: 100%;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+  }
+
+  .rc-16pm-dynamic-island,
+  .rc-16pm-home-indicator {
+    display: none;
+  }
+}
+
+.rc-toast {
+  width: 280px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.12);
+  animation-duration: 0.3s;
+}
+
+.animate__fadeIn {
+  opacity: 0;
+  animation: fade-in 0.3s forwards;
+}
+
+.animate__fadeOut {
+  animation: fade-out 0.3s forwards;
+}
+
+@keyframes fade-in {
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  to { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Container genérico para páginas demo/docs */
+.rc-root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Logo animada */
+.rc-logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.rc-logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.rc-logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Animação spin da logo */
+@keyframes rc-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Só anima se o usuário não pediu animações reduzidas no SO */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .rc-logo {
+    animation: rc-logo-spin infinite 20s linear;
+  }
+}
+
+/* Card simples de conteúdo */
+.rc-card {
+  padding: 2rem;
+  border-radius: 1rem;
+  background: #ffffff;
+}
+
+/* Texto auxiliar */
+.rc-read-the-docs {
+  color: #888;
+}
+
+
+/* FONTES DO DESIGN SYSTEM */
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap");
+
+/* ================================
+   DESIGN TOKENS (LIGHT + DARK)
+   ================================ */
+
+:root {
+  --background: 0 0% 96%;
+  --foreground: 0 0% 9%;
+
+  --card: 0 0% 98%;
+  --card-foreground: 0 0% 9%;
+
+  --popover: 0 0% 89%;
+  --popover-foreground: 0 0% 9%;
+
+  --primary: 161 93% 30%;
+  --primary-foreground: 151 80% 95%;
+
+  --secondary: 0 0% 32%;
+  --secondary-foreground: 0 0% 98%;
+
+  --muted: 0 0% 63%;
+  --muted-foreground: 0 0% 9%;
+
+  --accent: 166 76% 96%;
+  --accent-foreground: 173 80% 40%;
+
+  --destructive: 0 72% 50%;
+  --destructive-foreground: 0 85% 97%;
+
+  --border: 0 0% 83%;
+  --input: 0 0% 83%;
+  --ring: 161 93% 30%;
+
+  --radius: 0.75rem;
+
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 0 0% 9%;
+  --sidebar-primary: 161 93% 30%;
+  --sidebar-primary-foreground: 151 80% 95%;
+  --sidebar-accent: 0 0% 32%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 0 0% 83%;
+  --sidebar-ring: 161 93% 30%;
+
+  --chart-1: 158 64% 51%;
+  --chart-2: 141 69% 58%;
+  --chart-3: 172 66% 50%;
+  --chart-4: 82 77% 55%;
+  --chart-5: 0 0% 45%;
+
+  --sidebar: 0 0% 98%;
+
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif;
+
+  --font-serif: "Lora", ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+
+  --font-mono: "Inconsolata", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+/* DARK MODE – quando o <body> ou <html> tiver class="dark" */
+.dark {
+  --background: 0 0% 9%;
+  --foreground: 0 0% 98%;
+
+  --card: 0 0% 14%;
+  --card-foreground: 0 0% 98%;
+
+  --popover: 0 0% 25%;
+  --popover-foreground: 0 0% 98%;
+
+  --primary: 158 64% 51%;
+  --primary-foreground: 165 91% 9%;
+
+  --secondary: 0 0% 45%;
+  --secondary-foreground: 0 0% 98%;
+
+  --muted: 0 0% 45%;
+  --muted-foreground: 0 0% 98%;
+
+  --accent: 178 84% 10%;
+  --accent-foreground: 172 66% 50%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 85% 97%;
+
+  --border: 0 0% 32%;
+  --input: 0 0% 32%;
+  --ring: 158 64% 51%;
+
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 158 64% 51%;
+  --sidebar-primary-foreground: 165 91% 9%;
+  --sidebar-accent: 172 66% 50%;
+  --sidebar-accent-foreground: 178 84% 10%;
+  --sidebar-border: 0 0% 32%;
+  --sidebar-ring: 158 64% 51%;
+
+  --chart-1: 156 71% 66%;
+  --chart-2: 141 76% 73%;
+  --chart-3: 170 76% 64%;
+  --chart-4: 81 84% 67%;
+  --chart-5: 0 0% 45%;
+
+  --sidebar: 0 0% 14%;
+
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1),
+    0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+}
+
+/* ================================
+   BASE GLOBAL (equivalente ao @apply)
+   ================================ */
+
+/* Em Tailwind tinha: * { @apply border-border } */
+*,
+*::before,
+*::after {
+  border-color: hsl(var(--border));
+}
+
+/* Em Tailwind: body { @apply bg-background text-foreground } */
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+}
+
+.bg-card {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+}
+
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+
+.btn-rc-primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}

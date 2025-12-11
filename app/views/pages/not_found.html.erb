@@ -1,0 +1,16 @@
+<div class="rc-shell">
+  <%= render "components/iphone_frame" do %>
+    <div class="p-4 text-center">
+
+      <div class="mb-3 fs-1">🧭</div>
+      <h2 class="h5 fw-bold mb-2">Página não encontrada</h2>
+      <p class="text-muted small mb-4">
+        Opa, o endereço que você tentou acessar não existe no RoutineCare.
+      </p>
+
+      <%= link_to "Voltar para a Home", root_path,
+        class: "btn btn-primary w-100 py-2 rounded-4 fw-semibold" %>
+
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,42 @@
+<div class="rc-shell">
+  <%= render "components/iphone_frame" do %>
+    <div class="p-4">
+
+      <h2 class="h5 fw-bold mb-1">Boas-vindas, <%= current_user.first_name || "você" %> 👋</h2>
+      <p class="text-muted small mb-4">
+        Só mais alguns detalhes pra deixar sua experiência do RoutineCare perfeita.
+      </p>
+
+      <div class="rc-card bg-white rounded-4 shadow-sm p-3 mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="fw-semibold">Passo 1</span>
+          <span class="badge bg-success-subtle text-success small">Recomendado</span>
+        </div>
+        <p class="text-muted small mb-0">
+          Confira seus dados de perfil, foto e contato.
+        </p>
+      </div>
+
+      <div class="rc-card bg-white rounded-4 shadow-sm p-3 mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="fw-semibold">Passo 2</span>
+          <span class="badge bg-secondary-subtle text-secondary small">Opcional</span>
+        </div>
+        <p class="text-muted small mb-0">
+          Configure notificações e lembretes de medicação.
+        </p>
+      </div>
+
+      <div class="d-flex flex-column gap-2 mt-4">
+        <%= link_to "Configurar Perfil agora", edit_profile_path,
+          class: "btn btn-outline-primary w-100 py-2 rounded-4 fw-semibold" %>
+
+        <%= button_to "Concluir e ir para o painel",
+          onboarding_path,
+          method: :patch,
+          class: "btn btn-success w-100 py-2 rounded-4 fw-bold" %>
+      </div>
+
+    </div>
+  <% end %>
+</div>
