@@ -1,3 +1,6 @@
+<%= link_to "Voltar para lista de pacientes", patients_path, class: "btn btn-link" %>
+<%= link_to "Editar", edit_patient_path(@patient), class: "btn btn-sm btn-outline-primary" %>
+
 <div>
   <h1><%= @patient.name %></h1>
 
@@ -14,6 +17,7 @@
       <div>
         <%= appointment.title %>
         <%= appointment.occurs_at %>
+        <%= appointment.specialty %>
         <%= appointment.notes %>
       </div>
     <% end %>
@@ -25,7 +29,39 @@
       </div>
     <% end %>
 </div>
- <!-- Botão de editar (placeholder por enquanto) -->
-<%= link_to "Editar", edit_patient_path(@patient), class: "btn btn-sm btn-outline-primary" %>
 
-<%= link_to "Voltar para lista de pacientes", patients_path, class: "btn btn-link" %>
+ <!-- Botão de editar (placeholder por enquanto) -->
+
+<br>
+<div data-controller="toggle-display">
+  <div class="btn btn-primary" data-action="click->toggle-display#toggle">
+    Adicionar medicamento
+  </div>
+
+  <%= simple_form_for [@patient, @medication], html: {class: "d-none", data: {toggle_display_target: "form"}} do |f| %>
+    <%= f.input :name %>
+    <%= f.input :dosage %>
+    <%= f.submit %>
+  <% end %>
+</div>
+<br><br>
+<div data-controller="toggle-display">
+  <div class="btn btn-primary" data-action="click->toggle-display#toggle">
+    Adicionar Consulta
+  </div>
+
+  <%= simple_form_for [@patient, @appointment], html: {class: "d-none", data: {toggle_display_target: "form"}} do |f| %>
+    <%= f.input :title %>
+    <%= f.input :occurs_at %>
+    <%= f.input :specialty %>
+    <%= f.input :notes %>
+    <%= f.submit %>
+  <% end %>
+</div>
+
+
+<br><br>
+<%= simple_form_for [@patient, @cares] do |f| %>
+  <%= f.input :caregiver, collection: Caregiver.all, label_method: ->(c) { c.user.email } %>
+  <%= f.submit %>
+<% end %>

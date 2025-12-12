@@ -1,5 +1,7 @@
 <%= link_to "⬅ Voltar ao início", root_path, class: "btn btn-link" %>
 
+<% @patients = current_user.caregiver.patients %>
+
 <ul>
   <% @patients.each do |patient| %>
     <li>
