@@ -1,35 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
-
-  # Página inicial da aplicação (equivalente ao <Route path="/" element={<Welcome />} /> ou <Index />)
   root to: "pages#home"
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Healthcheck
+  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
+  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Páginas estáticas / de fluxo
-  get "/welcome",        to: "pages#welcome"
-  get "/auth",           to: "pages#auth"
-  get "/select-role",    to: "pages#select_role"
-  get "/onboarding",     to: "pages#onboarding"
-  get "/home",           to: "pages#home"             # opcional, mesmo que root
-  get "/patient-profile", to: "pages#patient_profile"
-  get "/patient-home",    to: "pages#patient_home"
-  get "/reports",         to: "pages#reports"
-  get "/settings",        to: "pages#settings"
-  get "/edit-profile",    to: "pages#edit_profile"
-
-  # Catch-all para páginas não encontradas (equivalente ao <Route path="*" element={<NotFound />} />)
-  match "*path", to: "pages#not_found", via: :all
-
-  # Domínio principal já existente
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :patients, only: [:index, :show, :new, :create, :destroy] do
-    resources :medications, only: [:create, :show]
-    resources :appointments, only: [:create, :show]
-  end
+resources :patients, only: [:index, :show, :new, :create, :destroy] do
+  resources :medications, only: [:create, :show]
+  resources :appointments, only: [:create, :show]
+end
 
   namespace :caregiver do
     resources :patients, only: [:index, :show]
