@@ -1,4 +1,4 @@
-class CaregiversController < ApplicationController
+class Caregiver::PatientsController < ApplicationController
   before_action :authenticate_user!
 
   def index

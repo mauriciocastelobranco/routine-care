@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # Healthcheck
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Páginas estáticas / de fluxo (equivalentes às pages do React)
+  # Páginas estáticas / de fluxo
   get "/welcome",        to: "pages#welcome"
   get "/auth",           to: "pages#auth"
   get "/select-role",    to: "pages#select_role"
@@ -23,8 +23,15 @@ Rails.application.routes.draw do
   match "*path", to: "pages#not_found", via: :all
 
   # Domínio principal já existente
-  resources :patients, only: ["index", "show"] do
-    resources :medications, only: ["create", "show"]
-    resources :appointments, only: ["create", "show"]
+
+  # Defines the root path route ("/")
+  # root "posts#index"
+  resources :patients, only: [:index, :show, :new, :create, :destroy] do
+    resources :medications, only: [:create, :show]
+    resources :appointments, only: [:create, :show]
+  end
+
+  namespace :caregiver do
+    resources :patients, only: [:index, :show]
   end
 end
