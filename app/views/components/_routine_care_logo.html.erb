@@ -1,0 +1,48 @@
+<%# app/views/components/_routine_care_logo.html.erb %>
+<%# Locals:
+#  class_name: String (opcional) – ex: "w-16 h-16" ou "logo-lg"
+%>
+
+<%
+  # Classe padrão, igual ao default "w-16 h-16" do React
+  default_class = "routinecare-logo"
+  svg_class = [default_class, class_name].compact.join(" ")
+%>
+
+<svg
+  viewBox="0 0 100 100"
+  class="<%= svg_class %>"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Heart shape -->
+  <path
+    d="M50 85C50 85 15 60 15 35C15 20 27 12 40 12C47 12 50 18 50 18C50 18 53 12 60 12C73 12 85 20 85 35C85 60 50 85 50 85Z"
+    class="fill-primary"
+  />
+  <!-- Checkmark -->
+  <path
+    d="M35 45L45 55L65 35"
+    stroke="white"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+
+
+  />
+</svg>
+
+<svg viewBox="0 0 100 100"
+     class="<%= class_name %>"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <path d="M50 85C50 85 15 60 15 35C15 20 27 12 40 12C47 12 50 18 50 18C50 18 53 12 60 12C73 12 85 20 85 35C85 60 50 85 50 85Z"
+        fill="var(--primary)" />
+
+  <path d="M35 45L45 55L65 35"
+        stroke="white"
+        stroke-width="6"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+</svg>

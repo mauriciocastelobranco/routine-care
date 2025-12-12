@@ -1,0 +1,53 @@
+<div class="rc-shell">
+  <%= render "components/iphone_frame" do %>
+    <div class="p-4">
+
+      <% if @patient.present? %>
+        <h2 class="h5 fw-bold mb-1">
+          <%= @patient.name || "Paciente ##{@patient.id}" %>
+        </h2>
+        <p class="text-muted small mb-3">
+          Perfil do paciente e visão geral.
+        </p>
+
+        <div class="text-center mb-4">
+          <div class="rounded-circle bg-light mx-auto mb-3 d-flex align-items-center justify-content-center"
+               style="width: 100px; height: 100px;">
+            <span class="fs-1">🧑‍⚕️</span>
+          </div>
+        </div>
+
+        <div class="rc-card bg-white rounded-4 shadow-sm p-3 mb-3">
+          <h6 class="fw-bold mb-2">Informações básicas</h6>
+          <p class="small mb-1 text-muted">Idade: —</p>
+          <p class="small mb-1 text-muted">
+            Condição:
+            <%= @patient.respond_to?(:condition) ? @patient.condition : "Não informada" %>
+          </p>
+          <p class="small mb-0 text-muted">Responsável: —</p>
+        </div>
+
+        <div class="rc-card bg-white rounded-4 shadow-sm p-3 mb-3">
+          <h6 class="fw-bold mb-2">Últimas atualizações</h6>
+          <p class="small text-muted mb-0">
+            Aqui você pode futuramente puxar dados de medicações, exames, relatórios, etc.
+          </p>
+        </div>
+
+      <% else %>
+        <div class="text-center mt-5 text-muted small">
+          Nenhum paciente encontrado.
+          <br>
+          Volte à lista de pacientes.
+        </div>
+      <% end %>
+
+      <div class="mt-3">
+        <%= link_to "Voltar para lista de pacientes",
+          patient_home_path,
+          class: "btn btn-outline-secondary w-100 py-2 rounded-4" %>
+      </div>
+
+    </div>
+  <% end %>
+</div>

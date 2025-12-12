@@ -1,0 +1,130 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center p-4"
+     style="background: linear-gradient(to bottom, var(--accent), var(--background));">
+
+  <%= render "components/iphone_frame" do %>
+
+    <div class="h-100 d-flex flex-column px-4">
+
+      <!-- HEADER -->
+      <div class="d-flex align-items-center justify-content-between pt-3 pb-2">
+        <div class="d-flex align-items-center gap-3">
+          <%= render "components/routine_care_logo", class_name: "w-10 h-10" %>
+
+          <div>
+            <h1 class="fw-bold text-dark m-0">Routine Care</h1>
+            <p class="small text-muted m-0">Bem-vindo(a) de volta!</p>
+          </div>
+        </div>
+
+        <!-- NOTIFICAÇÕES (Popover via Stimulus) -->
+        <div data-controller="notifications" class="position-relative">
+
+          <button data-action="click->notifications#toggle"
+                  class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                  style="width: 40px; height: 40px;">
+            🔔
+          </button>
+
+          <!-- POPOVER -->
+          <div data-notifications-target="panel"
+               class="shadow rounded p-3 bg-white"
+               style="display:none; width: 240px; position:absolute; right:0; top:48px; z-index:999;">
+
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
+              <span class="fw-semibold">Notificações</span>
+              <input type="checkbox"
+                     checked
+                     data-action="notifications#toggleMaster"
+                     data-notifications-target="masterSwitch">
+            </div>
+
+            <% [
+              ["Medicações", "medication"],
+              ["Consultas", "appointment"],
+              ["Exames", "exam"],
+              ["Check-in Diário", "checkin"],
+              ["Sinais Vitais", "vitals"],
+              ["Emergências", "emergency"]
+            ].each do |label, key| %>
+
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="small"><%= label %></span>
+                <input type="checkbox"
+                       data-notifications-target="subSwitch"
+                       data-key="<%= key %>"
+                       checked>
+              </div>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- WELCOME BANNER -->
+      <div class="position-relative mt-3 bg-primary text-white rounded-4 p-4 overflow-hidden">
+
+        <div class="position-relative" style="max-width: 60%;">
+          <h2 class="fw-bold mb-1">Olá, <%= current_user&.first_name || "Usuário" %>!</h2>
+          <p class="small opacity-75">
+            Organizando a rotina e a saúde de quem cuida e de quem precisa de cuidado.
+          </p>
+        </div>
+
+        <% if current_user&.avatar.present? %>
+          <%= image_tag current_user.avatar,
+                class: "position-absolute rounded-circle border border-white",
+                style: "right: 15px; bottom: 10px; width: 90px; height: 90px; object-fit: cover;" %>
+        <% else %>
+          <%= image_tag "doctor-illustration.png",
+                class: "position-absolute",
+                style: "right: -10px; bottom: -8px; height: 130px;" %>
+        <% end %>
+
+        <!-- Circles -->
+        <div class="position-absolute"
+             style="top:15px; right:100px; width:55px; height:55px; border-radius:50%; background:#ffffff22;"></div>
+        <div class="position-absolute"
+             style="bottom:-30px; left:-30px; width:90px; height:90px; border-radius:50%; background:#ffffff22;"></div>
+      </div>
+
+      <!-- MENU PRINCIPAL -->
+      <div class="mt-4 flex-grow-1">
+        <h3 class="small fw-semibold text-muted mb-3">Menu Principal</h3>
+
+        <div class="d-flex flex-column gap-3">
+          <%= render "components/menu_card",
+              title: "Adicionar Paciente",
+              description: "Cadastre um novo paciente",
+              icon_emoji: "➕",
+              path: "#"
+          %>
+
+          <%= render "components/menu_card",
+              title: "Meus Pacientes",
+              description: "Veja todos os seus pacientes",
+              icon_emoji: "👥",
+              path: patients_path
+          %>
+
+          <%= render "components/menu_card",
+              title: "Relatórios",
+              description: "Acompanhe os relatórios",
+              icon_emoji: "📄",
+              path: "#"
+          %>
+
+          <%= render "components/menu_card",
+              title: "Configurações",
+              description: "Ajustes do aplicativo",
+              icon_emoji: "⚙️",
+              path: "#"
+          %>
+        </div>
+      </div>
+
+      <div style="height: 10px;"></div>
+
+    </div>
+
+  <% end %>
+</div>
