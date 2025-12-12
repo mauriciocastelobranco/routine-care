@@ -4,7 +4,7 @@
 
 <div class="actions">
   <!-- Por enquanto não faz nada além de ficar na mesma página -->
-  <%= link_to "Adicionar paciente", new_patient_path, class: "btn btn-success" %>
+  <%= link_to "Adicionar paciente", "#", class: "btn btn-success" %>
 </div>
 
 <ul>
@@ -13,13 +13,7 @@
       <%= link_to patient.name, patient_path(patient) %>
 
       <!-- Botão de excluir (placeholder por enquanto) -->
-      <%= button_to "Excluir",
-                    patient_path(patient),
-                    method: :delete,
-                    form: { style: "display:inline-block; margin-left:8px;" },
-                    data: { turbo: false },
-                    onclick: "return confirm('Tem certeza que deseja excluir esse paciente?');",
-                    class: "btn btn-sm btn-outline-danger" %>
+      <%= link_to "Excluir", "#", class: "btn btn-sm btn-outline-danger" %>
     </li>
   <% end %>
 </ul>

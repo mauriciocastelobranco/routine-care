@@ -7,10 +7,10 @@ class PatientsController < ApplicationController
   end
 
   def show
-  @patient = Patient.find(params[:id])
-  @medication = Medication.new
-  @appointment = Appointment.new
-  @cares = Care.new
+    @patient = Patient.find(params[:id])
+    @medication = Medication.new
+    @appointment = Appointment.new
+    @cares = Care.new
   end
 
   def new
@@ -40,10 +40,10 @@ class PatientsController < ApplicationController
   end
 
   def destroy
-  @patient = Patient.find(params[:id])
-  @patient.destroy
+    @patient = Patient.find(params[:id])
+    @patient.destroy
 
-  redirect_to patients_path, notice: "Paciente excluído com sucesso."
+    redirect_to patients_path, notice: "Paciente excluído com sucesso."
   end
 
   private
@@ -60,5 +60,6 @@ class PatientsController < ApplicationController
       :insurance,
       :insurance_number
       )
+    @chats = @patient.chats.where(user: current_user)
   end
 end

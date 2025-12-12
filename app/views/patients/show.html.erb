@@ -65,3 +65,22 @@
   <%= f.input :caregiver, collection: Caregiver.all, label_method: ->(c) { c.user.email } %>
   <%= f.submit %>
 <% end %>
+<%= link_to "Voltar para lista de pacientes", patients_path, class: "btn btn-link" %>
+
+<div class="row">
+  <div class="col-md-3">
+    <h2>Chats</h2>
+    <div class="mb-4">
+      <% if @chats.any? %>
+        <ul>
+          <% @chats.each do |chat| %>
+            <li><%= link_to chat.title, chat_path(chat) %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        There are no chats yet.
+      <% end %>
+    </div>
+    <%= button_to "New chat", patient_chats_path(@patient), class: "btn btn-primary" %>
+  </div>
+</div>

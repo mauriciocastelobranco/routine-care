@@ -1,0 +1,11 @@
+<%= link_to "← #{@chat.patient.name}", patient_path(@chat.patient) %>
+
+<h1 id="chat_title"><%= @chat.title %></h1>
+
+<div id="messages">
+  <%= render "messages/messages", messages: @chat.messages %>
+</div>
+
+<div id="new_message_container">
+  <%= render "messages/form", chat: @chat, message: @message %>
+</div>
