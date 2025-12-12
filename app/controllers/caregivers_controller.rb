@@ -8,4 +8,8 @@ class CaregiversController < ApplicationController
   def show
     @patient = Patient.find(params[:id])
   end
+
+  def create
+  end
+
 end
