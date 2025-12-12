@@ -1,4 +1,6 @@
 class PatientsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   def index
     @patients = Patient.all
@@ -23,6 +25,17 @@ class PatientsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @patient.update(patient_params)
+      redirect_to patient_path(@patient), notice: "Paciente atualizado com sucesso."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
   @patient = Patient.find(params[:id])
   @patient.destroy
@@ -31,6 +44,10 @@ class PatientsController < ApplicationController
   end
 
   private
+
+  def set_patient
+    @patient = Patient.find(params[:id])
+  end
 
   def patient_params
     params.require(:patient).permit(

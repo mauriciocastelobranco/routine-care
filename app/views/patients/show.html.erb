@@ -1,6 +1,14 @@
 <div>
-  <h1><% @patient.name %></h1>
+  <h1><%= @patient.name %></h1>
 
+    <%# <% @patient.each do |patient| %>
+      <div>
+        <%= @patient.name %><br>
+        <%= @patient.birth %><br>
+        <%= @patient.address %><br>
+        <%= @patient.insurance %><br>
+        <%= @patient.insurance_number %><br>
+      </div>
 
     <% @patient.appointments.each do |appointment| %>
       <div>
@@ -18,6 +26,6 @@
     <% end %>
 </div>
  <!-- Botão de editar (placeholder por enquanto) -->
-<%= link_to "Editar", "#", class: "btn btn-sm btn-outline-primary" %>
+<%= link_to "Editar", edit_patient_path(@patient), class: "btn btn-sm btn-outline-primary" %>
 
 <%= link_to "Voltar para lista de pacientes", patients_path, class: "btn btn-link" %>

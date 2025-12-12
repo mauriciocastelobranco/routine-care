@@ -5,9 +5,9 @@ User.destroy_all
 
 User.create!(email: "teste@email.com", password: "123123")
 
-joao = Patient.create!(name: "João Grilo", birth: "01/02/03", user_id: User.last.id)
-maria = Patient.create!(name: "Maria José", birth: "02/03/04", user_id: User.last.id)
-enzo = Patient.create!(name: "Enzo Souza", birth: "03/04/05", user_id: User.last.id)
+joao = Patient.create!(name: "João Grilo", birth: "2003/02/17", user_id: User.last.id, address: "Rua numero 1", insurance: "sulamerica", insurance_number: 123321)
+maria = Patient.create!(name: "Maria José", birth: "2004/03/08", user_id: User.last.id, address: "Rua numero 2", insurance: "unimed", insurance_number: 89247)
+enzo = Patient.create!(name: "Enzo Souza", birth: "2005/04/15", user_id: User.last.id,  address: "Rua numero 3", insurance: "amil", insurance_number: 2740129)
 
 m1 = Medication.create!(name: "Vitamina D", dosage: "1 cápsula semanal", patient_id: joao.id)
 
