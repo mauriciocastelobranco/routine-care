@@ -1,0 +1,10 @@
+<h1>Editar Consulta</h1>
+
+<%= simple_form_for [@patient, @appointment] do |f| %>
+  <%= f.input :title %>
+  <%= f.input :occurs_at %>
+  <%= f.input :specialty %>
+  <%= f.input :notes %>
+  <%= f.submit "Salvar", class: "btn btn-primary" %>
+  <%= link_to "Voltar", patient_path(@patient), class: "btn btn-secondary" %>
+<% end %>

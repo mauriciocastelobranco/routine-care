@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_09_140532) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_12_173620) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_09_140532) do
     t.index ["patient_id"], name: "index_cares_on_patient_id"
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.string "title"
+    t.bigint "patient_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_chats_on_patient_id"
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
   create_table "medications", force: :cascade do |t|
     t.string "name"
     t.bigint "patient_id", null: false
@@ -48,6 +58,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_09_140532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_medications_on_patient_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "role"
+    t.text "content"
+    t.bigint "chat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -59,6 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_09_140532) do
     t.text "address"
     t.string "insurance"
     t.string "insurance_number"
+    t.text "system_prompt"
     t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
@@ -78,6 +98,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_09_140532) do
   add_foreign_key "caregivers", "users"
   add_foreign_key "cares", "caregivers"
   add_foreign_key "cares", "patients"
+  add_foreign_key "chats", "patients"
+  add_foreign_key "chats", "users"
   add_foreign_key "medications", "patients"
+  add_foreign_key "messages", "chats"
   add_foreign_key "patients", "users"
 end

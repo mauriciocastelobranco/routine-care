@@ -10,6 +10,8 @@ class CaregiversController < ApplicationController
   end
 
   def create
+    caregiver = Caregiver.find_or_create_by!(user: current_user)
+    redirect_to caregiver_patients_path, notice: "Perfil de cuidador ativo."
   end
 
 end
