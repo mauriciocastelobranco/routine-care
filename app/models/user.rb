@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :patients
+  has_many :patients, dependent: :destroy
   has_one :caregiver, dependent: :destroy
 
   devise :database_authenticatable, :registerable,

@@ -3,11 +3,11 @@ class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   def index
-    @patients = Patient.all
+    @patients = current_user.patients
   end
 
   def show
-  @patient = Patient.find(params[:id])
+  @patient = current_user.patients.find(params[:id])
   @medication = Medication.new
   @appointment = Appointment.new
   @care = Care.new
@@ -19,7 +19,7 @@ class PatientsController < ApplicationController
   end
 
   def create
-    @patient = Patient.new(patient_params)
+    @patient = current_user.patients.new(patient_params)
     @patient.user = current_user
 
     if @patient.save
@@ -30,15 +30,18 @@ class PatientsController < ApplicationController
   end
 
   def edit
+    @patient = current_user.patients.find(params[:id])
   end
 
   def update
+   @patient = current_user.patients.find(params[:id])
+
     if @patient.update(patient_params)
       redirect_to patient_path(@patient), notice: "Paciente atualizado com sucesso."
-    else
-      render :edit, status: :unprocessable_entity
-    end
+   else
+    render :edit, status: :unprocessable_entity
   end
+end
 
   def destroy
   @patient = Patient.find(params[:id])
@@ -50,7 +53,7 @@ class PatientsController < ApplicationController
   private
 
   def set_patient
-    @patient = Patient.find(params[:id])
+    @patient = current_user.patients.find(params[:id])
   end
 
   def patient_params
