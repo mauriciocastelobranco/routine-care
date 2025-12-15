@@ -44,10 +44,10 @@ class PatientsController < ApplicationController
 end
 
   def destroy
-  @patient = Patient.find(params[:id])
-  @patient.destroy
+    @patient = Patient.find(params[:id])
+    @patient.destroy
 
-  redirect_to patients_path, notice: "Paciente excluído com sucesso."
+    redirect_to patients_path, notice: "Paciente excluído com sucesso."
   end
 
   private
@@ -64,5 +64,6 @@ end
       :insurance,
       :insurance_number
       )
+    @chats = @patient.chats.where(user: current_user)
   end
 end
