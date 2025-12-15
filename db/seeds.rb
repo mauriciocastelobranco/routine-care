@@ -5,7 +5,7 @@ Patient.destroy_all
 Caregiver.destroy_all
 User.destroy_all
 
-User.create!(email: "teste@email.com", password: "123123")
+User.create!(email: "teste@email.com", password: "123123", name: "teste")
 
 joao = Patient.create!(name: "João Grilo", birth: "2003/02/17", user_id: User.last.id, address: "Rua numero 1", insurance: "sulamerica", insurance_number: 123321)
 maria = Patient.create!(name: "Maria José", birth: "2004/03/08", user_id: User.last.id, address: "Rua numero 2", insurance: "unimed", insurance_number: 89247)
