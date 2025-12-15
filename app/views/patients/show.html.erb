@@ -6,7 +6,6 @@
 
     <%# <% @patient.each do |patient| %>
       <div>
-        <%= @patient.name %><br>
         <%= @patient.birth %><br>
         <%= @patient.address %><br>
         <%= @patient.insurance %><br>
@@ -102,7 +101,6 @@
       class: "btn btn-sm btn-outline-danger" %>
   </div>
 <% end %>
-<%= link_to "Voltar para lista de pacientes", patients_path, class: "btn btn-link" %>
 
 <div class="row">
   <div class="col-md-3">

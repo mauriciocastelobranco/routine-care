@@ -1,6 +1,12 @@
 <div>
-  <h1><% @patient.name %></h1>
+  <h1><%= @patient.name %></h1>
 
+    <div>
+      <%= @patient.birth %><br>
+      <%= @patient.address %><br>
+      <%= @patient.insurance %><br>
+      <%= @patient.insurance_number %><br>
+    </div>
 
     <% @patient.appointments.each do |appointment| %>
       <div>
