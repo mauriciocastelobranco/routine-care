@@ -4,4 +4,5 @@ class Patient < ApplicationRecord
   has_many :medications, dependent: :destroy
   has_many :cares, dependent: :destroy
   has_many :caregivers, through: :cares
+  has_many :chats
 end

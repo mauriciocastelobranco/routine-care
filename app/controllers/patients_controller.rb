@@ -7,11 +7,12 @@ class PatientsController < ApplicationController
   end
 
   def show
-  @patient = current_user.patients.find(params[:id])
-  @medication = Medication.new
-  @appointment = Appointment.new
-  @care = Care.new
-  @caregivers = Caregiver.includes(:user).all
+    @patient = current_user.patients.find(params[:id])
+    @medication = Medication.new
+    @appointment = Appointment.new
+    @care = Care.new
+    @caregivers = Caregiver.includes(:user).all
+    @chats = @patient.chats
   end
 
   def new
