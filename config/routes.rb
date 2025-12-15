@@ -16,6 +16,7 @@ resources :patients, only: [:index, :show, :new, :create, :edit, :update, :destr
   resources :medications, only: [:create, :show, :edit, :update, :destroy]
   resources :appointments, only: [:create, :show, :edit, :update, :destroy]
   resources :caregivers, only: [:create, :destroy]
+  resources :chats
 end
 
 

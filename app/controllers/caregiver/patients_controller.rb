@@ -9,5 +9,6 @@ class Caregiver::PatientsController < ApplicationController
     def show
       caregiver = current_user.caregiver
       @patient = caregiver.patients.find(params[:id]) # garante que é “meu”
+      @chats = @patient.chats
     end
 end
