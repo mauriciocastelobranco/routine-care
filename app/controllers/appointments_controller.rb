@@ -23,19 +23,27 @@ class AppointmentsController < ApplicationController
   end
 
   def edit
+  @patient = Patient.find(params[:patient_id])
+  @appointment = @patient.appointments.find(params[:id])
   end
 
   def update
+    @patient = Patient.find(params[:patient_id])
+    @appointment = @patient.appointments.find(params[:id])
+
     if @appointment.update(appointment_params)
-      redirect_to patient_appointments_path(@patient), notice: "Consulta atualizada."
+      redirect_to patient_path(@patient), notice: "Consulta atualizada."
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @appointment.destroy
-    redirect_to patient_appointments_path(@patient), notice: "Consulta removida."
+    patient = Patient.find(params[:patient_id])
+    appointment = patient.appointments.find(params[:id])
+    appointment.destroy
+
+    redirect_to patient_path(patient), notice: "Consulta removida."
   end
 
   private

@@ -19,6 +19,15 @@
         <%= appointment.occurs_at %>
         <%= appointment.specialty %>
         <%= appointment.notes %>
+
+        <%= link_to "Editar",
+        edit_patient_appointment_path(@patient, appointment),
+        class: "btn btn-sm btn-outline-primary" %>
+
+        <%= link_to "Excluir",
+        patient_appointment_path(@patient, appointment),
+        data: { turbo_method: :delete, turbo_confirm: "Excluir consulta?" },
+        class: "btn btn-danger btn-sm" %>
       </div>
     <% end %>
 
@@ -26,6 +35,15 @@
       <div>
         <%= medication.name %>
         <%= medication.dosage %>
+
+        <%= link_to "Editar",
+        edit_patient_medication_path(@patient, medication),
+        class: "btn btn-sm btn-outline-primary" %>
+
+        <%= link_to "Excluir",
+      patient_medication_path(@patient, medication),
+      data: { turbo_method: :delete, turbo_confirm: "Excluir medicamento?" },
+      class: "btn btn-danger btn-sm" %>
       </div>
     <% end %>
 </div>
@@ -61,9 +79,28 @@
 
 
 <br><br>
-<%= simple_form_for [@patient, @cares] do |f| %>
-  <%= f.input :caregiver, collection: Caregiver.all, label_method: ->(c) { c.user.email } %>
-  <%= f.submit %>
+<h3>Vincular cuidador</h3>
+
+<%= simple_form_for [@patient, @care] do |f| %>
+  <%= f.input :caregiver_id,
+    collection: @caregivers,
+    label: "Caregiver",
+    label_method: ->(c) { c.user.email },
+    value_method: :id %>
+
+  <%= f.submit "Vincular", class: "btn btn-outline-primary" %>
+<% end %>
+
+<h3>Cuidadores deste paciente</h3>
+<% @patient.cares.includes(caregiver: :user).each do |care| %>
+  <div>
+    <%= care.caregiver.user.email %>
+
+    <%= link_to "Remover",
+      patient_care_path(@patient, care),
+      data: { turbo_method: :delete, turbo_confirm: "Remover este cuidador?" },
+      class: "btn btn-sm btn-outline-danger" %>
+  </div>
 <% end %>
 <%= link_to "Voltar para lista de pacientes", patients_path, class: "btn btn-link" %>
 

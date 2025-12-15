@@ -9,11 +9,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+resources :caregivers, only: [:create]
+
 resources :patients, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-  resources :cares, only: [:create]
-  resources :medications, only: [:create, :show]
-  resources :appointments, only: [:create, :show]
-  resources :caregivers, only: [:create]
+  resources :cares, only: [:create, :destroy]
+  resources :medications, only: [:create, :show, :edit, :update, :destroy]
+  resources :appointments, only: [:create, :show, :edit, :update, :destroy]
+  resources :caregivers, only: [:create, :destroy]
 end
 
 

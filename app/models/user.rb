@@ -1,7 +1,6 @@
 class User < ApplicationRecord
-  has_many :patients
-  has_one :caregiver
-  has_many :chats, dependent: :destroy
+  has_many :patients, dependent: :destroy
+  has_one :caregiver, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

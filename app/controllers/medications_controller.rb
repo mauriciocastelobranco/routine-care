@@ -23,19 +23,27 @@ class MedicationsController < ApplicationController
   end
 
   def edit
+  @patient = Patient.find(params[:patient_id])
+  @medication = @patient.medications.find(params[:id])
   end
 
   def update
+    @patient = Patient.find(params[:patient_id])
+    @medication = @patient.medications.find(params[:id])
+
     if @medication.update(medication_params)
-      redirect_to patient_medications_path(@patient), notice: "Medicação atualizada."
+      redirect_to patient_path(@patient), notice: "Medicamento atualizado."
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @medication.destroy
-    redirect_to patient_medications_path(@patient), notice: "Medicação removida."
+    patient = Patient.find(params[:patient_id])
+    medication = patient.medications.find(params[:id])
+    medication.destroy
+
+    redirect_to patient_path(patient), notice: "Medicamento removido."
   end
 
   private
@@ -52,10 +60,6 @@ class MedicationsController < ApplicationController
     params.require(:medication).permit(
       :name,
       :dosage,
-      :frequency,
-      :start_date,
-      :end_date,
-      :observations
     )
   end
 end

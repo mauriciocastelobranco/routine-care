@@ -1,5 +1,8 @@
-<h1>Editar medicação</h1>
+<h1>Editar Medicamento</h1>
 
-<%= render "form", medication: @medication %>
-
-<%= link_to "Voltar", patient_medications_path(@patient) %>
+<%= simple_form_for [@patient, @medication] do |f| %>
+  <%= f.input :name, label: "Nome" %>
+  <%= f.input :dosage, label: "Dosagem" %>
+  <%= f.submit "Salvar", class: "btn btn-primary" %>
+  <%= link_to "Voltar", patient_path(@patient), class: "btn btn-secondary" %>
+<% end %>
