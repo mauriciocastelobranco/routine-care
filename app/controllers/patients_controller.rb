@@ -65,6 +65,5 @@ end
       :insurance,
       :insurance_number
       )
-    @chats = @patient.chats.where(user: current_user)
-  end
+   end
 end
