@@ -26,19 +26,26 @@
 <%= link_to "Voltar para lista de pacientes", caregiver_patients_path, class: "btn btn-link" %>
 
 <div class="row">
-  <div class="col-md-3">
-    <h2>Chats</h2>
-    <div class="mb-4">
-      <% if @chats.any? %>
-        <ul>
-          <% @chats.each do |chat| %>
-            <li><%= link_to chat.title, chat_path(chat) %></li>
-          <% end %>
-        </ul>
-      <% else %>
-        There are no chats yet.
-      <% end %>
-    </div>
-    <%= button_to "New chat", patient_chats_path(@patient), class: "btn btn-primary" %>
-  </div>
+<h2>Chats</h2>
+
+<% @chats.each do |chat| %>
+  <li style="display:flex; gap:8px; align-items:center;">
+    <%= link_to chat.title, caregiver_chat_path(chat) %>
+
+    <% if chat.user == current_user %>
+      <%= button_to "Excluir",
+                    caregiver_chat_path(chat),
+                    method: :delete,
+                    class: "btn btn-sm btn-outline-danger",
+                    form: { style: "display:inline-block;" },
+                    data: { turbo: false },
+                    onclick: "return confirm('Tem certeza que deseja excluir este chat?');" %>
+    <% end %>
+  </li>
+<% end %>
+  </ul>
+
+<%= button_to "New chat",
+              caregiver_patient_chats_path(@patient),
+              class: "btn btn-primary" %>
 </div>

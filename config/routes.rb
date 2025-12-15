@@ -20,12 +20,16 @@ resources :patients, only: [:index, :show, :new, :create, :edit, :update, :destr
 end
 
 
-  namespace :caregiver do
-    resources :patients, only: [:index, :show]
+namespace :caregiver do
+  resources :patients, only: [:index, :show] do
     resources :chats, only: [:create]
   end
+
+  resources :chats, only: [:show, :destroy]
+end
 
   resources :chats, only: :show do
     resources :messages, only: [:create]
   end
+
 end

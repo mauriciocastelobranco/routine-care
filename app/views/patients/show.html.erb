@@ -103,15 +103,23 @@
 <% end %>
 
 <div class="row">
-  <div class="col-md-3">
-    <h2>Chats</h2>
-    <div class="mb-4">
-      <% if @chats.any? %>
-        <ul>
-          <% @chats.each do |chat| %>
-            <li><%= link_to chat.title, chat_path(chat) %></li>
-          <% end %>
-        </ul>
+<h2>Chats</h2>
+<% if @patient.chats.where(user: current_user).any? %>
+  <ul>
+  <% @chats.each do |chat| %>
+    <li style="display:flex; gap:8px; align-items:center;">
+      <%= link_to chat.title, chat_path(chat) %>
+
+      <%= button_to "Excluir",
+                    patient_chat_path(@patient, chat),
+                    method: :delete,
+                    class: "btn btn-sm btn-outline-danger",
+                    form: { style: "display:inline-block;" },
+                    data: { turbo: false },
+                    onclick: "return confirm('Tem certeza que deseja excluir este chat?');" %>
+    </li>
+  <% end %>
+</ul>
       <% else %>
         There are no chats yet.
       <% end %>

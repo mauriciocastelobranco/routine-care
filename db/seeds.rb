@@ -1,8 +1,8 @@
 Medication.destroy_all
 Appointment.destroy_all
+Chat.destroy_all
 Patient.destroy_all
 Caregiver.destroy_all
-Chat.destroy_all
 User.destroy_all
 
 User.create!(email: "teste@email.com", password: "123123")

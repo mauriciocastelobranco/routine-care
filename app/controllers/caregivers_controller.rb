@@ -7,6 +7,8 @@ class CaregiversController < ApplicationController
 
   def show
     @patient = Patient.find(params[:id])
+
+    @chats = @patient.chats.where(user: current_user)
   end
 
   def create
