@@ -1,129 +1,287 @@
-<%= link_to "Voltar para lista de pacientes", patients_path, class: "btn btn-link" %>
-<%= link_to "Editar", edit_patient_path(@patient), class: "btn btn-sm btn-outline-primary" %>
+<div class="patient-show-page">
+  <div class="patient-show-shell">
 
-<div>
-  <h1><%= @patient.name %></h1>
+    <div class="patient-show-top">
+      <%= link_to "⬅ Voltar para lista de pacientes", patients_path, class: "patient-show-back" %>
 
-    <div>
-      <%= @patient.birth %><br>
-      <%= @patient.address %><br>
-      <%= @patient.insurance %><br>
-      <%= @patient.insurance_number %><br>
+      <div class="patient-show-header">
+        <div class="patient-show-titleblock">
+          <div class="patient-show-avatar" aria-hidden="true">
+            <%= @patient.name.to_s.strip.first&.upcase || "P" %>
+          </div>
+
+          <div>
+            <h1 class="patient-show-title"><%= @patient.name %></h1>
+            <p class="patient-show-subtitle">
+              <% if @patient.birth.present? %>
+                <strong>Idade:</strong> <%= ((Date.current - @patient.birth).to_i / 365.25).floor %> anos
+                <span class="dot-sep">•</span>
+              <% end %>
+
+              <% if @patient.insurance.present? %>
+                <strong>Convênio:</strong> <%= @patient.insurance %>
+              <% else %>
+                <span>Convênio não informado</span>
+              <% end %>
+            </p>
+          </div>
+        </div>
+
+        <div class="patient-show-actions">
+          <%= link_to "Editar paciente", edit_patient_path(@patient), class: "btn-soft" %>
+        </div>
+      </div>
     </div>
 
-  <% @patient.appointments.each do |appointment| %>
-    <div>
-      <%= appointment.title %>
-      <%= appointment.occurs_at %>
-      <%= appointment.specialty %>
-      <%= appointment.notes %>
+    <!-- DADOS DO PACIENTE -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2 class="panel-title">Dados do paciente</h2>
+      </div>
 
-      <%= link_to "Editar",
-      edit_patient_appointment_path(@patient, appointment),
-      class: "btn btn-sm btn-outline-primary" %>
+      <div class="panel-body">
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label">Data de nascimento</div>
+            <div class="info-value"><%= @patient.birth.present? ? l(@patient.birth) : "—" %></div>
+          </div>
 
-      <%= link_to "Excluir",
-      patient_appointment_path(@patient, appointment),
-      data: { turbo_method: :delete, turbo_confirm: "Excluir consulta?" },
-      class: "btn btn-danger btn-sm" %>
+          <div class="info-item">
+            <div class="info-label">Convênio</div>
+            <div class="info-value"><%= @patient.insurance.presence || "—" %></div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">Número da carteirinha</div>
+            <div class="info-value"><%= @patient.insurance_number.presence || "—" %></div>
+          </div>
+
+          <div class="info-item info-item--full">
+            <div class="info-label">Endereço</div>
+            <div class="info-value"><%= @patient.address.presence || "—" %></div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
 
-  <% @patient.medications.each do |medication| %>
-    <div>
-      <%= medication.name %>
-      <%= medication.dosage %>
+    <!-- MEDICAMENTOS -->
+    <div class="panel">
+      <div class="panel-head panel-head--split">
+        <h2 class="panel-title">Medicamentos</h2>
 
-      <%= link_to "Editar",
-      edit_patient_medication_path(@patient, medication),
-      class: "btn btn-sm btn-outline-primary" %>
+        <div data-controller="toggle-display">
+          <button class="btn-primary-soft" type="button" data-action="click->toggle-display#toggle">
+            Adicionar medicamento
+          </button>
 
-      <%= link_to "Excluir",
-    patient_medication_path(@patient, medication),
-    data: { turbo_method: :delete, turbo_confirm: "Excluir medicamento?" },
-    class: "btn btn-danger btn-sm" %>
+          <div class="panel-form d-none" data-toggle-display-target="form">
+            <%= simple_form_for [@patient, @medication] do |f| %>
+              <div class="form-grid">
+                <div class="form-field">
+                  <%= f.input :name, label: "Nome", input_html: { class: "form-input" } %>
+                </div>
+                <div class="form-field">
+                  <%= f.input :dosage, label: "Dosagem", input_html: { class: "form-input" } %>
+                </div>
+              </div>
+              <div class="form-actions">
+                <%= f.submit "Salvar", class: "btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <% if @patient.medications.any? %>
+          <ul class="list">
+            <% @patient.medications.each do |medication| %>
+              <li class="row">
+                <div class="row-main">
+                  <div class="row-title"><%= medication.name %></div>
+                  <div class="row-sub"><%= medication.dosage %></div>
+                </div>
+
+                <div class="row-actions">
+                  <%= link_to "Editar",
+                        edit_patient_medication_path(@patient, medication),
+                        class: "btn-soft" %>
+
+                  <%= link_to "Excluir",
+                        patient_medication_path(@patient, medication),
+                        data: { turbo_method: :delete, turbo_confirm: "Excluir medicamento?" },
+                        class: "btn-danger-soft" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="empty">Nenhum medicamento cadastrado.</div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-</div>
 
- <!-- Botão de editar (placeholder por enquanto) -->
+    <!-- CONSULTAS -->
+    <div class="panel">
+      <div class="panel-head panel-head--split">
+        <h2 class="panel-title">Consultas</h2>
 
-<br>
-<div data-controller="toggle-display">
-  <div class="btn btn-primary" data-action="click->toggle-display#toggle">
-    Adicionar medicamento
-  </div>
+        <div data-controller="toggle-display">
+          <button class="btn-primary-soft" type="button" data-action="click->toggle-display#toggle">
+            Adicionar consulta
+          </button>
 
-  <%= simple_form_for [@patient, @medication], html: {class: "d-none", data: {toggle_display_target: "form"}} do |f| %>
-    <%= f.input :name %>
-    <%= f.input :dosage %>
-    <%= f.submit %>
-  <% end %>
-</div>
-<br><br>
-<div data-controller="toggle-display">
-  <div class="btn btn-primary" data-action="click->toggle-display#toggle">
-    Adicionar Consulta
-  </div>
+          <div class="panel-form d-none" data-toggle-display-target="form">
+            <%= simple_form_for [@patient, @appointment] do |f| %>
+              <div class="form-grid">
+                <div class="form-field">
+                  <%= f.input :title, label: "Título", input_html: { class: "form-input" } %>
+                </div>
+                <div class="form-field">
+                  <%= f.input :occurs_at, label: "Data", input_html: { class: "form-input" } %>
+                </div>
+                <div class="form-field">
+                  <%= f.input :specialty, label: "Especialidade", input_html: { class: "form-input" } %>
+                </div>
+                <div class="form-field form-field--full">
+                  <%= f.input :notes, label: "Notas", input_html: { class: "form-input" } %>
+                </div>
+              </div>
+              <div class="form-actions">
+                <%= f.submit "Salvar", class: "btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
 
-  <%= simple_form_for [@patient, @appointment], html: {class: "d-none", data: {toggle_display_target: "form"}} do |f| %>
-    <%= f.input :title %>
-    <%= f.input :occurs_at %>
-    <%= f.input :specialty %>
-    <%= f.input :notes %>
-    <%= f.submit %>
-  <% end %>
-</div>
+      <div class="panel-body">
+        <% if @patient.appointments.any? %>
+          <ul class="list">
+            <% @patient.appointments.each do |appointment| %>
+              <li class="row">
+                <div class="row-main">
+                  <div class="row-title"><%= appointment.title %></div>
+                  <div class="row-sub">
+                    <%= appointment.occurs_at %>
+                    <span class="dot-sep">•</span>
+                    <%= appointment.specialty %>
+                    <% if appointment.notes.present? %>
+                      <span class="dot-sep">•</span>
+                      <%= appointment.notes %>
+                    <% end %>
+                  </div>
+                </div>
 
+                <div class="row-actions">
+                  <%= link_to "Editar",
+                        edit_patient_appointment_path(@patient, appointment),
+                        class: "btn-soft" %>
 
-<br><br>
-<h3>Vincular cuidador</h3>
-
-<%= simple_form_for [@patient, @care] do |f| %>
-  <%= f.input :caregiver_id,
-    collection: @caregivers,
-    label: "Caregiver",
-    label_method: ->(c) { c.user.name },
-    include_blank: false,
-    value_method: :id %>
-
-  <%= f.submit "Vincular", class: "btn btn-outline-primary" %>
-<% end %>
-
-<h3>Cuidadores deste paciente</h3>
-<% @patient.cares.includes(caregiver: :user).each do |care| %>
-  <div>
-    <%= care.caregiver.user.name %>
-
-    <%= link_to "Remover",
-      patient_care_path(@patient, care),
-      data: { turbo_method: :delete, turbo_confirm: "Remover este cuidador?" },
-      class: "btn btn-sm btn-outline-danger" %>
-  </div>
-<% end %>
-
-<div class="row">
-<h2>Chats</h2>
-<% if @patient.chats.where(user: current_user).any? %>
-  <ul>
-  <% @chats.each do |chat| %>
-    <li style="display:flex; gap:8px; align-items:center;">
-      <%= link_to chat.title, chat_path(chat) %>
-
-      <%= button_to "Excluir",
-                    patient_chat_path(@patient, chat),
-                    method: :delete,
-                    class: "btn btn-sm btn-outline-danger",
-                    form: { style: "display:inline-block;" },
-                    data: { turbo: true },
-                    onclick: "return confirm('Tem certeza que deseja excluir este chat?');" %>
-    </li>
-  <% end %>
-</ul>
-      <% else %>
-        There are no chats yet.
-      <% end %>
+                  <%= link_to "Excluir",
+                        patient_appointment_path(@patient, appointment),
+                        data: { turbo_method: :delete, turbo_confirm: "Excluir consulta?" },
+                        class: "btn-danger-soft" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="empty">Nenhuma consulta cadastrada.</div>
+        <% end %>
+      </div>
     </div>
-    <%= button_to "New chat", patient_chats_path(@patient), class: "btn btn-primary" %>
+
+    <!-- CUIDADORES -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2 class="panel-title">Cuidadores</h2>
+        <p class="panel-subtitle">Vincule um cuidador e gerencie quem acompanha este paciente</p>
+      </div>
+
+      <div class="panel-body">
+        <div class="panel-form">
+          <%= simple_form_for [@patient, @care] do |f| %>
+            <div class="form-grid">
+              <div class="form-field form-field--full">
+                <%= f.input :caregiver_id,
+                  collection: @caregivers,
+                  label: "Selecionar cuidador",
+                  label_method: ->(c) { c.user.name },
+                  include_blank: false,
+                  value_method: :id,
+                  input_html: { class: "form-input" } %>
+              </div>
+            </div>
+            <div class="form-actions">
+              <%= f.submit "Vincular", class: "btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3 class="section-mini-title">Cuidadores vinculados</h3>
+
+        <% if @patient.cares.includes(caregiver: :user).any? %>
+          <ul class="list">
+            <% @patient.cares.includes(caregiver: :user).each do |care| %>
+              <li class="row">
+                <div class="row-main">
+                  <div class="row-title"><%= care.caregiver.user.name %></div>
+                  <div class="row-sub">Cuidador vinculado a este paciente</div>
+                </div>
+
+                <div class="row-actions">
+                  <%= link_to "Remover",
+                        patient_care_path(@patient, care),
+                        data: { turbo_method: :delete, turbo_confirm: "Remover este cuidador?" },
+                        class: "btn-danger-soft" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="empty">Nenhum cuidador vinculado ainda.</div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- CHATS -->
+    <div class="panel">
+      <div class="panel-head panel-head--split">
+        <h2 class="panel-title">Chats</h2>
+
+        <%= button_to "Novo chat", patient_chats_path(@patient), class: "btn-primary", form: { class: "inline-form" } %>
+      </div>
+
+      <div class="panel-body">
+        <% if @patient.chats.where(user: current_user).any? %>
+          <ul class="list">
+            <% @chats.each do |chat| %>
+              <li class="row">
+                <div class="row-main">
+                  <%= link_to chat.title, chat_path(chat), class: "row-title link" %>
+                  <div class="row-sub">Abrir conversa</div>
+                </div>
+
+                <div class="row-actions">
+                  <%= button_to "Excluir",
+                        patient_chat_path(@patient, chat),
+                        method: :delete,
+                        class: "btn-danger-soft",
+                        form: { class: "inline-form" },
+                        data: { turbo: true },
+                        onclick: "return confirm('Tem certeza que deseja excluir este chat?');" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="empty">Ainda não há chats.</div>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>
