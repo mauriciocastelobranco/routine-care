@@ -1,8 +1,64 @@
-<div class="role-selection">
-  <h1>Como você deseja acessar?</h1>
+<div class="role-page">
+  <div class="role-shell">
+    <div class="role-top">
+      <div class="role-badge" aria-hidden="true"><span>✓</span></div>
+      <h1 class="role-title">Como você vai usar o app?</h1>
+      <p class="role-subtitle">Selecione o perfil que melhor descreve você</p>
+    </div>
 
-  <%= link_to "Sou Familiar (Admin)", patients_path, class: "btn btn-primary" %>
+    <div class="role-list">
+      <!-- FAMÍLIA -->
+      <div class="role-item" data-action="select-role" data-target="family">
+        <span class="role-left">
+          <span class="role-icon role-icon--gray">👥</span>
+        </span>
 
-  <%= button_to "Sou um cuidador", caregivers_path, method: :post, class: "btn btn-primary" %>
+        <span class="role-center">
+          <span class="role-name">Família (ADM)</span>
+          <span class="role-desc">
+            Responsável por acompanhar e gerenciar o cuidado
+          </span>
+        </span>
 
+        <span class="role-dot" aria-hidden="true"></span>
+
+        <%= link_to "", patients_path,
+              class: "role-hidden-link",
+              data: { role_link: "family" } %>
+      </div>
+
+      <!-- CUIDADOR -->
+      <div class="role-item" data-action="select-role" data-target="caregiver">
+        <span class="role-left">
+          <span class="role-icon role-icon--green">♡</span>
+        </span>
+
+        <span class="role-center">
+          <span class="role-name">Cuidador</span>
+          <span class="role-desc">
+            Profissional ou familiar que cuida de alguém
+          </span>
+        </span>
+
+        <span class="role-dot" aria-hidden="true"></span>
+
+        <%= form_with url: caregivers_path,
+              method: :post,
+              class: "role-hidden-btn" do %>
+          <button type="submit"
+                  class="hidden-submit"
+                  data-role-btn="caregiver">
+          </button>
+        <% end %>
+      </div>
+    </div>
+
+    <button class="role-cta" type="button" disabled>
+      Continuar
+    </button>
+
+    <p class="role-footnote">
+      Você pode alterar isso depois nas configurações
+    </p>
+  </div>
 </div>
