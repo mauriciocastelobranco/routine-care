@@ -1,0 +1,44 @@
+<%= form_with model: patient, class: "patient-form" do |f| %>
+  <% if patient.errors.any? %>
+    <div class="form-alert">
+      <strong>Não foi possível salvar:</strong>
+      <ul>
+        <% patient.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-grid">
+    <div class="form-field">
+      <%= f.label :name, "Nome", class: "form-label" %>
+      <%= f.text_field :name, class: "form-input", placeholder: "Ex: Maria Souza" %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :birth, "Data de nascimento", class: "form-label" %>
+      <%= f.date_field :birth, class: "form-input" %>
+    </div>
+
+    <div class="form-field form-field--full">
+      <%= f.label :address, "Endereço", class: "form-label" %>
+      <%= f.text_area :address, class: "form-input", rows: 3, placeholder: "Rua, número, bairro, cidade..." %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :insurance, "Convênio", class: "form-label" %>
+      <%= f.text_field :insurance, class: "form-input", placeholder: "Ex: Unimed" %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :insurance_number, "Número da carteirinha", class: "form-label" %>
+      <%= f.text_field :insurance_number, class: "form-input", placeholder: "Ex: 123456" %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= link_to "Cancelar", patients_path, class: "btn-soft" %>
+    <%= f.submit "Salvar", class: "patient-form-cta" %>
+  </div>
+<% end %>

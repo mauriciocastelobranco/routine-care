@@ -3,7 +3,7 @@ class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   def index
-    @patients = current_user.patients
+    @patients = current_user.patients.order(:name)
   end
 
   def show
