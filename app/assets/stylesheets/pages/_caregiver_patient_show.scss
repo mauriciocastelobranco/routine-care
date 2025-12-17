@@ -1,0 +1,138 @@
+.caregiver-patient-show {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.caregiver-card {
+  width: 100%;
+  max-width: 720px;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.caregiver-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.back-link {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.title-block .patient-name {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 6px 0 0 0;
+  opacity: 0.7;
+}
+
+.section-card {
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-title {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.info-item .info-label {
+  font-weight: 700;
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+
+.info-item .info-value {
+  font-size: 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-row {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.list-title {
+  font-weight: 800;
+}
+
+.list-meta {
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+.list-notes {
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+.empty {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.chat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.chat-link {
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.inline-form {
+  display: inline-block;
+  margin: 0;
+}
+
+.back-button {
+  align-self: flex-start;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 600;
+  text-decoration: none;
+}

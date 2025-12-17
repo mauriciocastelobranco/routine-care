@@ -2,7 +2,11 @@
 
 <%= simple_form_for [@patient, @appointment] do |f| %>
   <%= f.input :title %>
-  <%= f.input :occurs_at %>
+ <%= f.input :occurs_at,
+            as: :date,
+            html5: true,
+            label: "Data da consulta" %>
+
   <%= f.input :specialty %>
   <%= f.input :notes %>
   <%= f.submit "Salvar", class: "btn btn-primary" %>

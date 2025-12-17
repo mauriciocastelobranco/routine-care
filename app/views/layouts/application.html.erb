@@ -17,3 +17,16 @@
     <%= yield %>
   </body>
 </html>
+
+
+<% if notice.present? || alert.present? %>
+  <div class="flash-wrap">
+    <% if notice.present? %>
+      <div class="flash flash--notice"><%= notice %></div>
+    <% end %>
+
+    <% if alert.present? %>
+      <div class="flash flash--alert"><%= alert %></div>
+    <% end %>
+  </div>
+<% end %>

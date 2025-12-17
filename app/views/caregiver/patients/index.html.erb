@@ -1,11 +1,33 @@
-<%= link_to "⬅ Voltar ao início", root_path, class: "btn btn-link" %>
+<div class="caregiver-page">
+  <div class="caregiver-card">
+    <div class="caregiver-header">
+      <%= link_to "← Voltar ao início", root_path, class: "caregiver-back" %>
 
-<%# <% @patients = current_user.caregiver.patients %>
+      <h1 class="caregiver-title">Pacientes</h1>
 
-<ul>
-  <% @patients.each do |patient| %>
-    <li>
-      <%= link_to patient.name, caregiver_patient_path(patient) %>
-    </li>
-  <% end %>
-</ul>
+    </div>
+
+    <% if @patients.blank? %>
+      <p class="caregiver-empty">Nenhum paciente disponível no momento.</p>
+    <% else %>
+      <div class="caregiver-list">
+        <% @patients.each do |patient| %>
+          <div class="caregiver-item">
+            <div class="caregiver-avatar">
+              <%= patient.name.to_s.first&.upcase %>
+            </div>
+
+            <div class="caregiver-info">
+              <div class="caregiver-name"><%= patient.name %></div>
+              <div class="caregiver-hint">Clique em ver para abrir os detalhes</div>
+            </div>
+
+            <div class="caregiver-actions">
+              <%= link_to "Ver", caregiver_patient_path(patient), class: "btn-soft" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

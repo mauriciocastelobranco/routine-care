@@ -1,51 +1,116 @@
-<div>
-  <h1><%= @patient.name %></h1>
+<div class="patients-page">
+  <div class="patients-shell">
 
-    <div>
-      <%= @patient.birth %><br>
-      <%= @patient.address %><br>
-      <%= @patient.insurance %><br>
-      <%= @patient.insurance_number %><br>
+    <!-- Topo -->
+    <div class="patients-top">
+      <%= link_to "⬅ Voltar ao início",
+                  caregiver_patients_path,
+                  class: "patients-back" %>
+
+      <div class="patients-header">
+        <div>
+          <h1 class="patients-title"><%= @patient.name %></h1>
+          <p class="patients-subtitle">Detalhes do paciente</p>
+        </div>
+      </div>
     </div>
 
-    <% @patient.appointments.each do |appointment| %>
-      <div>
-        <%= appointment.title %>
-        <%= appointment.occurs_at %>
-        <%= appointment.notes %>
+    <!-- Card principal -->
+    <div class="patients-card">
+
+  <!-- Informações -->
+  <section class="patient-section">
+    <h2 class="patient-section-title">Informações</h2>
+
+    <div class="patient-info-grid">
+      <div class="patient-info-item">
+        <span class="patient-info-label">Data de nascimento</span>
+        <span class="patient-info-value"><%= @patient.birth ? l(@patient.birth) : "-" %></span>
       </div>
-    <% end %>
 
-    <% @patient.medications.each do |medication| %>
-      <div>
-        <%= medication.name %>
-        <%= medication.dosage %>
+      <div class="patient-info-item">
+        <span class="patient-info-label">Endereço</span>
+        <span class="patient-info-value"><%= @patient.address.presence || "-" %></span>
       </div>
+
+      <div class="patient-info-item">
+        <span class="patient-info-label">Convênio</span>
+        <span class="patient-info-value"><%= @patient.insurance.presence || "-" %></span>
+      </div>
+
+      <div class="patient-info-item">
+        <span class="patient-info-label">Número do convênio</span>
+        <span class="patient-info-value"><%= @patient.insurance_number.presence || "-" %></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consultas -->
+  <section class="patient-section">
+    <h2 class="patient-section-title">Consultas</h2>
+
+    <% if @patient.appointments.any? %>
+      <% @patient.appointments.each do |appointment| %>
+        <div class="patient-info-item">
+          <div>
+            <div class="patient-info-label"><%= appointment.title %></div>
+            <div style="opacity:.75; font-size: 14px;"><%= appointment.notes %></div>
+          </div>
+          <div class="patient-info-value">
+            <%= appointment.occurs_at ? l(appointment.occurs_at.to_date) : "-" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Nenhuma consulta registrada.</p>
     <% end %>
-</div>
-<%= link_to "Voltar para lista de pacientes", caregiver_patients_path, class: "btn btn-link" %>
+  </section>
 
-<div class="row">
-<h2>Chats</h2>
+  <!-- Medicamentos -->
+  <section class="patient-section">
+    <h2 class="patient-section-title">Medicamentos</h2>
 
-<% @chats.each do |chat| %>
-  <li style="display:flex; gap:8px; align-items:center;">
-    <%= link_to chat.title, caregiver_chat_path(chat) %>
+    <% if @patient.medications.any? %>
+      <% @patient.medications.each do |medication| %>
+        <div class="patient-info-item">
+          <span class="patient-info-label"><%= medication.name %></span>
+          <span class="patient-info-value"><%= medication.dosage %></span>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Nenhum medicamento cadastrado.</p>
+    <% end %>
+  </section>
 
-    <% if chat.user == current_user %>
-      <%= button_to "Excluir",
+  <!-- Chats -->
+  <section class="patient-section">
+    <h2 class="patient-section-title">Chats</h2>
+
+    <% if @chats.any? %>
+      <ul style="list-style:none; padding:0; margin:0;">
+        <% @chats.each do |chat| %>
+          <li style="display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 0;">
+            <%= link_to chat.title, caregiver_chat_path(chat) %>
+
+            <% if chat.user == current_user %>
+              <%= button_to "Excluir",
                     caregiver_chat_path(chat),
                     method: :delete,
-                    class: "btn btn-sm btn-outline-danger",
-                    form: { style: "display:inline-block;" },
                     data: { turbo: false },
-                    onclick: "return confirm('Tem certeza que deseja excluir este chat?');" %>
+                    class: "btn-danger-soft",
+                    onclick: "return confirm('Deseja excluir este chat?');" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>Nenhum chat criado.</p>
     <% end %>
-  </li>
-<% end %>
-  </ul>
 
-<%= button_to "New chat",
-              caregiver_patient_chats_path(@patient),
-              class: "btn btn-primary" %>
+    <%= button_to "Novo chat",
+          caregiver_patient_chats_path(@patient),
+          class: "patients-cta",
+          style: "margin-top: 12px;" %>
+  </section>
+
 </div>

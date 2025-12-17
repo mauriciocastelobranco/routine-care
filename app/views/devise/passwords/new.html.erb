@@ -1,18 +1,37 @@
-<h2>Forgot your password?</h2>
+<div class="auth-page">
+  <div class="auth-shell">
+    <div class="auth-top">
+      <div class="auth-badge" aria-hidden="true"><span>↻</span></div>
+      <h1 class="auth-title">Esqueci minha senha</h1>
+      <p class="auth-subtitle">Informe seu e-mail para receber um link de redefinição.</p>
+    </div>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
+    <div class="auth-card">
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <div class="form-grid">
+          <div class="form-field form-field--full">
+            <%= f.input :email,
+                        label: "E-mail",
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" },
+                        wrapper_html: { class: "form-field" },
+                        label_html: { class: "form-label" },
+                        input_html: { class: "form-input", autocomplete: "email" } %>
+          </div>
+        </div>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
+        <div class="form-actions">
+          <%= link_to "Voltar para entrar", new_session_path(resource_name), class: "btn-soft" %>
+          <%= f.button :submit, "Enviar instruções", class: "patient-form-cta" %>
+        </div>
+      <% end %>
+
+      <div class="auth-links" style="margin-top: 10px;">
+        <% if devise_mapping.registerable? %>
+          <%= link_to "Criar conta", new_registration_path(resource_name) %>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
