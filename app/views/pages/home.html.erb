@@ -1,4 +1,4 @@
-<div class="role-page">
+<div class="role-page" data-controller="role-selection">
   <div class="role-shell">
     <div class="role-top">
       <div class="role-badge" aria-hidden="true"><span>✓</span></div>
@@ -8,7 +8,9 @@
 
     <div class="role-list">
       <!-- FAMÍLIA -->
-      <div class="role-item" data-action="select-role" data-target="family">
+      <div class="role-item" data-action="click->role-selection#select"
+           data-role-selection-target="item"
+           data-role-value="family">
         <span class="role-left">
           <span class="role-icon role-icon--gray">👥</span>
         </span>
@@ -23,12 +25,14 @@
         <span class="role-dot" aria-hidden="true"></span>
 
         <%= link_to "", patients_path,
-              class: "role-hidden-link",
-              data: { role_link: "family" } %>
+      class: "role-hidden-link",
+      data: { role_selection_target: "link" } %>
       </div>
 
       <!-- CUIDADOR -->
-      <div class="role-item" data-action="select-role" data-target="caregiver">
+      <div class="role-item" data-action="click->role-selection#select"
+           data-role-selection-target="item"
+           data-role-value="caregiver">
         <span class="role-left">
           <span class="role-icon role-icon--green">♡</span>
         </span>
@@ -44,7 +48,9 @@
 
         <%= form_with url: caregivers_path,
               method: :post,
-              class: "role-hidden-btn" do %>
+              class: "role-hidden-btn",
+              html: { data: { role_selection_target: "form" } } do %>
+
           <button type="submit"
                   class="hidden-submit"
                   data-role-btn="caregiver">
@@ -53,7 +59,9 @@
       </div>
     </div>
 
-    <button class="role-cta" type="button" disabled>
+    <button class="role-cta" type="button" disabled
+            data-role-selection-target="cta"
+            data-action="click->role-selection#confirm">
       Continuar
     </button>
 

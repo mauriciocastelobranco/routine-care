@@ -4,4 +4,4 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 
-import "./role_selection"
+import "./controllers/role_selection_controller"
