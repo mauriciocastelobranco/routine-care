@@ -1,15 +1,12 @@
 <div class="patient-show-page">
   <div class="patient-show-shell">
-
     <div class="patient-show-top">
       <%= link_to "⬅ Voltar para lista de pacientes", patients_path, class: "patient-show-back" %>
-
       <div class="patient-show-header">
         <div class="patient-show-titleblock">
           <div class="patient-show-avatar" aria-hidden="true">
             <%= @patient.name.to_s.strip.first&.upcase || "P" %>
           </div>
-
           <div>
             <h1 class="patient-show-title"><%= @patient.name %></h1>
             <p class="patient-show-subtitle">
@@ -17,7 +14,6 @@
                 <strong>Idade:</strong> <%= ((Date.current - @patient.birth).to_i / 365.25).floor %> anos
                 <span class="dot-sep">•</span>
               <% end %>
-
               <% if @patient.insurance.present? %>
                 <strong>Convênio:</strong> <%= @patient.insurance %>
               <% else %>
@@ -26,36 +22,30 @@
             </p>
           </div>
         </div>
-
         <div class="patient-show-actions">
           <%= link_to "Editar paciente", edit_patient_path(@patient), class: "btn-soft" %>
         </div>
       </div>
     </div>
-
     <!-- DADOS DO PACIENTE -->
     <div class="panel">
       <div class="panel-head">
         <h2 class="panel-title">Dados do paciente</h2>
       </div>
-
       <div class="panel-body">
         <div class="info-grid">
           <div class="info-item">
             <div class="info-label">Data de nascimento</div>
             <div class="info-value"><%= @patient.birth.present? ? l(@patient.birth) : "—" %></div>
           </div>
-
           <div class="info-item">
             <div class="info-label">Convênio</div>
             <div class="info-value"><%= @patient.insurance.presence || "—" %></div>
           </div>
-
           <div class="info-item">
             <div class="info-label">Número da carteirinha</div>
             <div class="info-value"><%= @patient.insurance_number.presence || "—" %></div>
           </div>
-
           <div class="info-item info-item--full">
             <div class="info-label">Endereço</div>
             <div class="info-value"><%= @patient.address.presence || "—" %></div>
@@ -63,17 +53,14 @@
         </div>
       </div>
     </div>
-
     <!-- MEDICAMENTOS -->
     <div class="panel">
       <div class="panel-head panel-head--split">
         <h2 class="panel-title">Medicamentos</h2>
-
         <div data-controller="toggle-display">
           <button class="btn-primary-soft" type="button" data-action="click->toggle-display#toggle">
             Adicionar medicamento
           </button>
-
           <div class="panel-form d-none" data-toggle-display-target="form">
             <%= simple_form_for [@patient, @medication] do |f| %>
               <div class="form-grid">
@@ -91,7 +78,6 @@
           </div>
         </div>
       </div>
-
       <div class="panel-body">
         <% if @patient.medications.any? %>
           <ul class="list">
@@ -101,12 +87,10 @@
                   <div class="row-title"><%= medication.name %></div>
                   <div class="row-sub"><%= medication.dosage %></div>
                 </div>
-
                 <div class="row-actions">
                   <%= link_to "Editar",
                         edit_patient_medication_path(@patient, medication),
                         class: "btn-soft" %>
-
                   <%= link_to "Excluir",
                         patient_medication_path(@patient, medication),
                         data: { turbo_method: :delete, turbo_confirm: "Excluir medicamento?" },
@@ -120,24 +104,20 @@
         <% end %>
       </div>
     </div>
-
-   <!-- CONSULTAS -->
+    <!-- CONSULTAS -->
 <div class="panel">
   <div class="panel-head panel-head--split">
     <h2 class="panel-title">Consultas</h2>
-
     <div data-controller="toggle-display">
       <button class="btn-primary-soft" type="button" data-action="click->toggle-display#toggle">
         Adicionar consulta
       </button>
-
       <div class="panel-form d-none" data-toggle-display-target="form">
         <%= simple_form_for [@patient, @appointment] do |f| %>
           <div class="form-grid">
             <div class="form-field">
               <%= f.input :title, label: "Título", input_html: { class: "form-input" } %>
             </div>
-
             <div class="form-field">
               <%= f.input :occurs_at,
                     as: :date,
@@ -145,14 +125,11 @@
                     label: "Data",
                     input_html: { class: "form-input" } %>
             </div>
-
             <div class="form-field">
               <%= f.input :specialty,
-                    as: :string,
                     label: "Especialidade",
                     input_html: { class: "form-input" } %>
             </div>
-
             <div class="form-field form-field--full">
               <%= f.input :notes,
                     as: :text,
@@ -160,7 +137,6 @@
                     input_html: { class: "form-input", rows: 3 } %>
             </div>
           </div>
-
           <div class="form-actions">
             <%= f.submit "Salvar", class: "btn-primary" %>
           </div>
@@ -168,7 +144,6 @@
       </div>
     </div>
   </div>
-
   <div class="panel-body">
     <% if @patient.appointments.any? %>
       <ul class="list">
@@ -188,20 +163,50 @@
                 <% end %>
               </div>
             </div>
-
             <div class="row-actions">
               <%= link_to "Editar",
                     edit_patient_appointment_path(@patient, appointment),
                     class: "btn-soft" %>
-
               <%= link_to "Excluir",
                     patient_appointment_path(@patient, appointment),
                     data: { turbo_method: :delete, turbo_confirm: "Excluir consulta?" },
                     class: "btn-danger-soft" %>
             </div>
           </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="empty">Nenhuma consulta cadastrada.</div>
+    <% end %>
+  </div>
+</div>
+    <!-- CUIDADORES -->
+    <div class="panel">
+      <div class="panel-head">
+        <h2 class="panel-title">Cuidadores</h2>
+        <p class="panel-subtitle">Vincule um cuidador e gerencie quem acompanha este paciente</p>
+      </div>
+      <div class="panel-body">
+        <div class="panel-form">
+          <%= simple_form_for [@patient, @care] do |f| %>
+            <div class="form-grid">
+              <div class="form-field form-field--full">
+                <%= f.input :caregiver_id,
+                  collection: @caregivers,
+                  label: "Selecionar cuidador",
+                  label_method: ->(c) { c.user.name },
+                  include_blank: false,
+                  value_method: :id,
+                  input_html: { class: "form-input" } %>
+              </div>
+            </div>
+            <div class="form-actions">
+              <%= f.submit "Vincular", class: "btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="divider"></div>
         <h3 class="section-mini-title">Cuidadores vinculados</h3>
-
         <% if @patient.cares.includes(caregiver: :user).any? %>
           <ul class="list">
             <% @patient.cares.includes(caregiver: :user).each do |care| %>
@@ -210,7 +215,6 @@
                   <div class="row-title"><%= care.caregiver.user.name %></div>
                   <div class="row-sub">Cuidador vinculado a este paciente</div>
                 </div>
-
                 <div class="row-actions">
                   <%= button_to "Remover",
                     patient_care_path(@patient, care),
@@ -224,22 +228,14 @@
         <% else %>
           <div class="empty">Nenhum cuidador vinculado ainda.</div>
         <% end %>
-      </ul>
-    <% else %>
-      <div class="empty">Nenhuma consulta cadastrada.</div>
-    <% end %>
-  </div>
-</div>
-
-
+      </div>
+    </div>
     <!-- CHATS -->
     <div class="panel">
       <div class="panel-head panel-head--split">
         <h2 class="panel-title">Chats</h2>
-
         <%= button_to "Novo chat", patient_chats_path(@patient), class: "btn-primary", form: { class: "inline-form" } %>
       </div>
-
       <div class="panel-body">
         <% if @patient.chats.where(user: current_user).any? %>
           <ul class="list">
@@ -249,7 +245,6 @@
                   <%= link_to chat.title, chat_path(chat), class: "row-title link" %>
                   <div class="row-sub">Abrir conversa</div>
                 </div>
-
                 <div class="row-actions">
                   <%= button_to "Excluir",
                         patient_chat_path(@patient, chat),
@@ -267,6 +262,5 @@
         <% end %>
       </div>
     </div>
-
   </div>
 </div>
