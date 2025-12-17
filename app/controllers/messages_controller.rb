@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
 
     @appointments = ""
     @patient.appointments.each do |appointment|
-      @appointments += "#{appointment.title}: #{appointment.occurs_at} - #{appointment.notes}, "
+      @appointments += "#{appointment.title}: #{appointment.specialty} - #{appointment.occurs_at} - #{appointment.notes}, "
     end
 
     [SYSTEM_PROMPT, patient_context, @patient.system_prompt, @medications, @appointments].compact.join("\n\n")
