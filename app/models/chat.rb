@@ -3,7 +3,7 @@ class Chat < ApplicationRecord
   belongs_to :patient
   belongs_to :user
 
-  DEFAULT_TITLE = "Untitled"
+  DEFAULT_TITLE = "Novo Chat"
   TITLE_PROMPT = <<~PROMPT
     Generate a short, descriptive, 3-to-6-word title that summarizes the user question for a chat conversation.
   PROMPT
