@@ -200,6 +200,29 @@
                     class: "btn-danger-soft" %>
             </div>
           </li>
+        <h3 class="section-mini-title">Cuidadores vinculados</h3>
+
+        <% if @patient.cares.includes(caregiver: :user).any? %>
+          <ul class="list">
+            <% @patient.cares.includes(caregiver: :user).each do |care| %>
+              <li class="row">
+                <div class="row-main">
+                  <div class="row-title"><%= care.caregiver.user.name %></div>
+                  <div class="row-sub">Cuidador vinculado a este paciente</div>
+                </div>
+
+                <div class="row-actions">
+                  <%= button_to "Remover",
+                    patient_care_path(@patient, care),
+                    method: :delete,
+                    data: { turbo_confirm: "Remover este cuidador?" },
+                    class: "btn-danger-soft" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="empty">Nenhum cuidador vinculado ainda.</div>
         <% end %>
       </ul>
     <% else %>
