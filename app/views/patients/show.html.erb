@@ -233,10 +233,11 @@
                 </div>
 
                 <div class="row-actions">
-                  <%= link_to "Remover",
-                        patient_care_path(@patient, care),
-                        data: { turbo_method: :delete, turbo_confirm: "Remover este cuidador?" },
-                        class: "btn-danger-soft" %>
+                  <%= button_to "Remover",
+                    patient_care_path(@patient, care),
+                    method: :delete,
+                    data: { turbo_confirm: "Remover este cuidador?" },
+                    class: "btn-danger-soft" %>
                 </div>
               </li>
             <% end %>

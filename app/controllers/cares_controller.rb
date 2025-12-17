@@ -13,11 +13,14 @@ class CaresController < ApplicationController
   end
 
 def destroy
-  chat = current_user.chats.find(params[:id])
-  patient = chat.patient
+  @care = Care.find(params[:id])
+  @patient = @care.patient
+  @care.destroy
 
-  chat.destroy
-  redirect_to patient_path(patient), notice: "Chat excluído."
+  respond_to do |format|
+    format.html { redirect_to patient_path(@patient), status: :see_other, notice: "Removido!" }
+    format.json { head :no_content }
+  end
 end
 
   private
