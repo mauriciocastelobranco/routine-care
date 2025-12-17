@@ -1,0 +1,152 @@
+.auth-page {
+  min-height: calc(100vh - 72px);
+  display: grid;
+  place-items: center;
+  padding: 56px 16px;
+  background: radial-gradient(1200px 600px at 50% -200px, #EAF5F0, transparent 70%),
+              #F6FAF8;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.auth-shell {
+  width: 100%;
+  max-width: 520px;
+}
+
+.auth-top {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.auth-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: #2F8F6D;
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  box-shadow: 0 14px 30px rgba(47, 143, 109, 0.18);
+
+  span {
+    color: #fff;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 1;
+  }
+}
+
+.auth-title {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #111827;
+}
+
+.auth-subtitle {
+  margin: 8px 0 0 0;
+  color: #6B7280;
+  font-size: 15px;
+}
+
+.auth-card {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.06);
+}
+
+.auth-wrapper {
+  margin: 0;
+}
+
+.auth-label {
+  display: block;
+  font-weight: 900;
+  font-size: 13px;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.auth-input {
+  width: 100%;
+  border: 1px solid #E5E7EB;
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+  font-size: 14px;
+  outline: none;
+
+  &:focus {
+    border-color: #2F8F6D;
+    box-shadow: 0 0 0 4px rgba(47, 143, 109, 0.12);
+  }
+}
+
+.auth-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 14px;
+}
+
+.auth-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #111827;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.auth-link {
+  color: #2F8F6D;
+  text-decoration: none;
+  font-weight: 800;
+
+  &:hover { text-decoration: underline; }
+}
+
+.auth-actions {
+  margin-top: 6px;
+}
+
+.auth-cta {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: #2F8F6D;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(47, 143, 109, 0.18);
+  transition: transform .15s ease, filter .15s ease;
+
+  &:hover { transform: translateY(-1px); filter: brightness(1.03); }
+}
+
+.auth-links {
+  margin-top: 14px;
+
+  a {
+    color: #2F8F6D;
+    font-weight: 800;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+
+  /* espaço entre links do devise/shared/links */
+  a + br + a { margin-top: 8px; }
+}
+
+@media (max-width: 520px) {
+  .auth-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

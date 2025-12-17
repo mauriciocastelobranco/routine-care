@@ -121,106 +121,85 @@
       </div>
     </div>
 
-    <!-- CONSULTAS -->
-    <div class="panel">
-      <div class="panel-head panel-head--split">
-        <h2 class="panel-title">Consultas</h2>
+   <!-- CONSULTAS -->
+<div class="panel">
+  <div class="panel-head panel-head--split">
+    <h2 class="panel-title">Consultas</h2>
 
-        <div data-controller="toggle-display">
-          <button class="btn-primary-soft" type="button" data-action="click->toggle-display#toggle">
-            Adicionar consulta
-          </button>
+    <div data-controller="toggle-display">
+      <button class="btn-primary-soft" type="button" data-action="click->toggle-display#toggle">
+        Adicionar consulta
+      </button>
 
-          <div class="panel-form d-none" data-toggle-display-target="form">
-            <%= simple_form_for [@patient, @appointment] do |f| %>
-              <div class="form-grid">
-                <div class="form-field">
-                  <%= f.input :title, label: "Título", input_html: { class: "form-input" } %>
-                </div>
-                <div class="form-field">
-                  <%= f.input :occurs_at, label: "Data", input_html: { class: "form-input" } %>
-                </div>
-                <div class="form-field">
-                  <%= f.input :specialty, label: "Especialidade", input_html: { class: "form-input" } %>
-                </div>
-                <div class="form-field form-field--full">
-                  <%= f.input :notes, label: "Notas", input_html: { class: "form-input" } %>
-                </div>
-              </div>
-              <div class="form-actions">
-                <%= f.submit "Salvar", class: "btn-primary" %>
-              </div>
-            <% end %>
+      <div class="panel-form d-none" data-toggle-display-target="form">
+        <%= simple_form_for [@patient, @appointment] do |f| %>
+          <div class="form-grid">
+            <div class="form-field">
+              <%= f.input :title, label: "Título", input_html: { class: "form-input" } %>
+            </div>
+
+            <div class="form-field">
+              <%= f.input :occurs_at,
+                    as: :date,
+                    html5: true,
+                    label: "Data",
+                    input_html: { class: "form-input" } %>
+            </div>
+
+            <div class="form-field">
+              <%= f.input :specialty,
+                    as: :string,
+                    label: "Especialidade",
+                    input_html: { class: "form-input" } %>
+            </div>
+
+            <div class="form-field form-field--full">
+              <%= f.input :notes,
+                    as: :text,
+                    label: "Notas",
+                    input_html: { class: "form-input", rows: 3 } %>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="panel-body">
-        <% if @patient.appointments.any? %>
-          <ul class="list">
-            <% @patient.appointments.each do |appointment| %>
-              <li class="row">
-                <div class="row-main">
-                  <div class="row-title"><%= appointment.title %></div>
-                  <div class="row-sub">
-                    <%= appointment.occurs_at %>
-                    <span class="dot-sep">•</span>
-                    <%= appointment.specialty %>
-                    <% if appointment.notes.present? %>
-                      <span class="dot-sep">•</span>
-                      <%= appointment.notes %>
-                    <% end %>
-                  </div>
-                </div>
-
-                <div class="row-actions">
-                  <%= link_to "Editar",
-                        edit_patient_appointment_path(@patient, appointment),
-                        class: "btn-soft" %>
-
-                  <%= link_to "Excluir",
-                        patient_appointment_path(@patient, appointment),
-                        data: { turbo_method: :delete, turbo_confirm: "Excluir consulta?" },
-                        class: "btn-danger-soft" %>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <div class="empty">Nenhuma consulta cadastrada.</div>
+          <div class="form-actions">
+            <%= f.submit "Salvar", class: "btn-primary" %>
+          </div>
         <% end %>
       </div>
     </div>
+  </div>
 
-    <!-- CUIDADORES -->
-    <div class="panel">
-      <div class="panel-head">
-        <h2 class="panel-title">Cuidadores</h2>
-        <p class="panel-subtitle">Vincule um cuidador e gerencie quem acompanha este paciente</p>
-      </div>
-
-      <div class="panel-body">
-        <div class="panel-form">
-          <%= simple_form_for [@patient, @care] do |f| %>
-            <div class="form-grid">
-              <div class="form-field form-field--full">
-                <%= f.input :caregiver_id,
-                  collection: @caregivers,
-                  label: "Selecionar cuidador",
-                  label_method: ->(c) { c.user.name },
-                  include_blank: false,
-                  value_method: :id,
-                  input_html: { class: "form-input" } %>
+  <div class="panel-body">
+    <% if @patient.appointments.any? %>
+      <ul class="list">
+        <% @patient.appointments.each do |appointment| %>
+          <li class="row">
+            <div class="row-main">
+              <div class="row-title"><%= appointment.title %></div>
+              <div class="row-sub">
+                <%= appointment.occurs_at.present? ? l(appointment.occurs_at) : "—" %>
+                <% if appointment.specialty.present? %>
+                  <span class="dot-sep">•</span>
+                  <%= appointment.specialty %>
+                <% end %>
+                <% if appointment.notes.present? %>
+                  <span class="dot-sep">•</span>
+                  <%= appointment.notes %>
+                <% end %>
               </div>
             </div>
-            <div class="form-actions">
-              <%= f.submit "Vincular", class: "btn-primary" %>
+
+            <div class="row-actions">
+              <%= link_to "Editar",
+                    edit_patient_appointment_path(@patient, appointment),
+                    class: "btn-soft" %>
+
+              <%= link_to "Excluir",
+                    patient_appointment_path(@patient, appointment),
+                    data: { turbo_method: :delete, turbo_confirm: "Excluir consulta?" },
+                    class: "btn-danger-soft" %>
             </div>
-          <% end %>
-        </div>
-
-        <div class="divider"></div>
-
+          </li>
         <h3 class="section-mini-title">Cuidadores vinculados</h3>
 
         <% if @patient.cares.includes(caregiver: :user).any? %>
@@ -245,8 +224,13 @@
         <% else %>
           <div class="empty">Nenhum cuidador vinculado ainda.</div>
         <% end %>
-      </div>
-    </div>
+      </ul>
+    <% else %>
+      <div class="empty">Nenhuma consulta cadastrada.</div>
+    <% end %>
+  </div>
+</div>
+
 
     <!-- CHATS -->
     <div class="panel">

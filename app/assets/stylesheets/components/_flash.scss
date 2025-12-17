@@ -1,0 +1,32 @@
+.flash-wrap {
+  position: fixed;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-50%);
+  z-index: 9999;
+
+  width: 520px;
+  max-width: calc(100% - 24px);
+
+}
+
+.flash {
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-weight: 800;
+  font-size: 14px;
+  border: 1px solid transparent;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+}
+
+.flash--notice {
+  background: #EAF5F0;
+  border-color: rgba(47, 143, 109, 0.25);
+  color: #1F6B53;
+}
+
+.flash--alert {
+  background: #FDECEC;
+  border-color: rgba(220, 38, 38, 0.25);
+  color: #991B1B;
+}

@@ -1,0 +1,58 @@
+pt-BR:
+  devise:
+    failure:
+      already_authenticated: "Você já está autenticado."
+      unauthenticated: "Você precisa fazer login ou se cadastrar antes de continuar."
+      invalid: "E-mail ou senha inválidos."
+      not_found_in_database: "E-mail ou senha inválidos."
+      locked: "Sua conta está bloqueada."
+      inactive: "Sua conta ainda não foi ativada."
+      timeout: "Sua sessão expirou. Faça login novamente."
+
+    sessions:
+      signed_in: "Login realizado com sucesso."
+      signed_out: "Logout realizado com sucesso."
+      already_signed_out: "Você já saiu da sua conta."
+
+    registrations:
+      signed_up: "Cadastro realizado com sucesso."
+      updated: "Seus dados foram atualizados com sucesso."
+      destroyed: "Sua conta foi removida com sucesso."
+
+    passwords:
+      send_instructions: "Você receberá um e-mail com instruções para redefinir sua senha."
+      updated: "Sua senha foi alterada com sucesso."
+      updated_not_active: "Sua senha foi alterada com sucesso."
+
+
+  activerecord:
+    attributes:
+      appointment:
+        title: "Título"
+        occurs_at: "Data da consulta"
+        specialty: "Especialidade"
+        notes: "Observações"
+
+
+  date:
+    formats:
+      default: "%d/%m/%Y"
+
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+
+
+  errors:
+    messages:
+      taken: "já está em uso"
+
+  activerecord:
+    errors:
+      models:
+        care:
+          attributes:
+            patient_id:
+              taken: "este paciente já está vinculado a um cuidador"
+            caregiver_id:
+              taken: "este cuidador já está vinculado a este paciente"

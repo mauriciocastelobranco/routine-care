@@ -1,0 +1,139 @@
+.caregiver-page {
+  min-height: calc(100vh - 72px);
+  padding: 28px 16px;
+  display: grid;
+  place-items: center;
+  background: #e9f1ee;
+}
+
+.caregiver-card {
+ width: 100%;
+  max-width: 720px;
+  margin: 0 12px;
+
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(6px);
+}
+
+.caregiver-back {
+  display: inline-block;
+  color: #1f6a53;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 12px;
+
+  &:hover { text-decoration: underline; }
+}
+
+.caregiver-title {
+  font-size: 44px;
+  line-height: 1.05;
+  margin: 0 0 6px 0;
+  color: #1a1a1a;
+}
+
+.caregiver-subtitle {
+  margin: 0 0 18px 0;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.caregiver-empty {
+  margin: 0;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.caregiver-list {
+  display: grid;
+  gap: 12px;
+}
+
+.caregiver-item {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.caregiver-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(31, 106, 83, 0.15);
+  color: #1f6a53;
+  font-weight: 800;
+}
+
+.caregiver-name {
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.caregiver-hint {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+
+.btn-soft {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #1f6a53;
+  background: rgba(31, 106, 83, 0.12);
+  border: 1px solid rgba(31, 106, 83, 0.25);
+
+  &:hover { background: rgba(31, 106, 83, 0.18); }
+}
+
+
+.patient-section {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.patient-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+}
+
+.patient-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.patient-info-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(0,0,0,0.02);
+  border-radius: 12px;
+}
+
+.patient-info-label {
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.patient-info-value {
+  font-weight: 600;
+}
