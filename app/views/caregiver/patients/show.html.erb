@@ -84,33 +84,35 @@
 
   <!-- Chats -->
   <section class="patient-section">
-    <h2 class="patient-section-title">Chats</h2>
+    <div class="panel-head panel-head--split">
+      <h2 class="panel-title">Chats</h2>
+      <%= button_to "Novo chat", patient_chats_path(@patient), class: "btn-primary", form: { class: "inline-form" } %>
+    </div>
 
     <% if @chats.any? %>
       <ul style="list-style:none; padding:0; margin:0;">
         <% @chats.each do |chat| %>
-          <li style="display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 0;">
-            <%= link_to chat.title, caregiver_chat_path(chat) %>
-
-            <% if chat.user == current_user %>
-              <%= button_to "Excluir",
-                    caregiver_chat_path(chat),
-                    method: :delete,
-                    data: { turbo: false },
-                    class: "btn-danger-soft",
-                    onclick: "return confirm('Deseja excluir este chat?');" %>
-            <% end %>
+          <li class="row">
+            <div class="row-main">
+              <%= link_to chat.title, caregiver_chat_path(chat), class: "row-title link" %>
+              <div class="row-sub">Abrir conversa</div>
+            </div>
+            <div class="row-actions">
+              <% if chat.user == current_user %>
+                <%= button_to "Excluir",
+                  caregiver_chat_path(chat),
+                  method: :delete,
+                  data: { turbo: false },
+                  class: "btn-danger-soft",
+                  onclick: "return confirm('Deseja excluir este chat?');" %>
+              <% end %>
+            </div>
           </li>
         <% end %>
       </ul>
     <% else %>
       <p>Nenhum chat criado.</p>
     <% end %>
-
-    <%= button_to "Novo chat",
-          caregiver_patient_chats_path(@patient),
-          class: "patients-cta",
-          style: "margin-top: 12px;" %>
   </section>
 
 </div>

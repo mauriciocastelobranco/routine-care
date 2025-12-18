@@ -1,11 +1,25 @@
-<%= link_to "← #{@chat.patient.name}", caregiver_patient_path(@chat.patient) %>
+<div class="chat-page">
+  <div class="chat-shell">
 
-<h1 id="chat_title"><%= @chat.title %></h1>
+    <div class="chat-top">
+      <%= link_to "← #{@chat.patient.name}", patient_path(@chat.patient), class: "chat-back" %>
 
-<div id="messages">
-  <%= render "messages/messages", messages: @chat.messages %>
-</div>
+      <div class="chat-heading">
+        <div class="chat-badge" aria-hidden="true"><span>💬</span></div>
+        <h1 id="chat_title" class="chat-title"><%= @chat.title %></h1>
+        <p class="chat-subtitle">Conversa relacionada ao paciente</p>
+      </div>
+    </div>
 
-<div id="new_message_container">
-  <%= render "messages/form", chat: @chat, message: @message %>
+    <div class="chat-card">
+      <div id="messages" class="chat-messages">
+        <%= render "messages/messages", messages: @chat.messages %>
+      </div>
+
+      <div id="new_message_container" class="chat-composer">
+        <%= render "messages/form", chat: @chat, message: @message %>
+      </div>
+    </div>
+
+  </div>
 </div>
