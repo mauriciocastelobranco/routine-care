@@ -1,14 +1,41 @@
-<h1>Editar Consulta</h1>
+<div class="auth-page">
+  <div class="auth-shell">
 
-<%= simple_form_for [@patient, @appointment] do |f| %>
-  <%= f.input :title %>
- <%= f.input :occurs_at,
-            as: :date,
-            html5: true,
-            label: "Data da consulta" %>
+    <div class="patients-top">
+      <%= link_to "⬅ Voltar", patient_path(@patient), class: "patients-back" %>
+    </div>
 
-  <%= f.input :specialty %>
-  <%= f.input :notes %>
-  <%= f.submit "Salvar", class: "btn btn-primary" %>
-  <%= link_to "Voltar", patient_path(@patient), class: "btn btn-secondary" %>
-<% end %>
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1 class="auth-title">Editar consulta</h1>
+        <p class="auth-subtitle">Atualize as informações da consulta</p>
+      </div>
+
+      <%= simple_form_for [@patient, @appointment] do |f| %>
+        <%= f.error_notification %>
+
+        <div class="auth-fields">
+          <%= f.input :title, label: "Título" %>
+
+          <%= f.input :occurs_at,
+                as: :date,
+                html5: true,
+                label: "Data" %>
+
+          <%= f.input :specialty, label: "Especialidade" %>
+
+          <%= f.input :notes,
+                as: :text,
+                label: "Notas",
+                input_html: { rows: 4 } %>
+        </div>
+
+        <div class="auth-actions auth-actions--split">
+          <%= f.button :submit, "Salvar", class: "btn-primary" %>
+
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -11,23 +11,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body><%= render "shared/navbar" %>
+  <body>
+    <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
-
-
-<% if notice.present? || alert.present? %>
-  <div class="flash-wrap">
-    <% if notice.present? %>
-      <div class="flash flash--notice"><%= notice %></div>
-    <% end %>
-
-    <% if alert.present? %>
-      <div class="flash flash--alert"><%= alert %></div>
-    <% end %>
-  </div>
-<% end %>

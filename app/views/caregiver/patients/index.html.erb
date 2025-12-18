@@ -18,7 +18,7 @@
             </div>
 
             <div class="caregiver-info">
-              <div class="caregiver-name"><%= patient.name %></div>
+              <div class="caregiver-name"><%= link_to patient.name, caregiver_patient_path(patient), class: "patients-name" %></div>
               <div class="caregiver-hint">Clique em ver para abrir os detalhes</div>
             </div>
 

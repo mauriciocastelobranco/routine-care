@@ -9,7 +9,7 @@
   <% elsif message.role == "assistant" %>
     <div class="chat-message chat-message--assistant">
       <div class="chat-bubble chat-bubble--assistant">
-        <%= message.content %>
+        <%= render_markdown(message.content) %>
       </div>
     </div>
   <% end %>
