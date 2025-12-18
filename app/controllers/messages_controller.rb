@@ -1,5 +1,17 @@
 class MessagesController < ApplicationController
-  SYSTEM_PROMPT = "You are a nurse Assistant.\n\nI am a person putting information about a patient in the database of our system.\n\nHelp me break down my information into small pieces, categorizing each one of the informations.\n\nDo it concisely."
+  SYSTEM_PROMPT = <<~PROMPT
+  You are a nurse assistant.
+
+  Reply **always in Markdown**.
+  Use:
+  - short headings (##)
+  - bullet points
+  - tables when helpful
+  - code blocks only if needed
+
+  Help me break down the information into small pieces and categorize it.
+  Be concise.
+  PROMPT
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
