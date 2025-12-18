@@ -1,8 +1,31 @@
-<h1>Editar Medicamento</h1>
+<div class="auth-page">
+  <div class="auth-shell">
 
-<%= simple_form_for [@patient, @medication] do |f| %>
-  <%= f.input :name, label: "Nome" %>
-  <%= f.input :dosage, label: "Dosagem" %>
-  <%= f.submit "Salvar", class: "btn btn-primary" %>
-  <%= link_to "Voltar", patient_path(@patient), class: "btn btn-secondary" %>
-<% end %>
+    <div class="patients-top">
+      <%= link_to "⬅ Voltar", patient_path(@patient), class: "patients-back" %>
+    </div>
+
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-icon">✓</div>
+        <h1 class="auth-title">Editar medicamento</h1>
+        <p class="auth-subtitle">Atualize nome e dosagem do medicamento</p>
+      </div>
+
+      <%= simple_form_for [@patient, @medication] do |f| %>
+        <%= f.error_notification %>
+
+        <div class="auth-fields">
+          <%= f.input :name, label: "Nome" %>
+          <%= f.input :dosage, label: "Dosagem" %>
+        </div>
+
+        <div class="auth-actions auth-actions--split">
+          <%= f.button :submit, "Salvar", class: "btn-primary" %>
+
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
