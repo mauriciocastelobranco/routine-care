@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
   private
 
   def patient_context
-  "Here is the context of the patient: #{@patient.name}, #{@patient.address}, #{@patient.insurance}, #{@patient.insurance_number}"
+  "Here is the context of the patient: #{@patient.name}, #{@patient.birth}, #{@patient.address}, #{@patient.insurance}, #{@patient.insurance_number}"
   end
 
   def instructions
