@@ -1,12 +1,6 @@
 <div class="auth-page">
   <div class="auth-shell">
 
-    <div class="auth-top">
-      <div class="auth-badge" aria-hidden="true"><span>✓</span></div>
-      <h1 class="auth-title">Entrar</h1>
-      <p class="auth-subtitle">Acesse sua conta para continuar</p>
-    </div>
-
     <div class="auth-card">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f| %>
 
