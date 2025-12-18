@@ -1,4 +1,13 @@
 <%= simple_form_for [chat, message] do |f| %>
-  <%= f.input :content, label: "Em que posso ajudar?", required: true, placeholder: "Digite aqui a sua pergunta" %>
-  <%= f.button :submit, 'Enviar', class: 'btn btn-primary' %>
+  <div class="form-group"> <label class="form-label">Em que posso ajudar? *</label>
+
+    <div class="input-group">
+      <%= f.input_field :content,
+                        class: 'form-control',
+                        placeholder: "Digite aqui a sua pergunta",
+                        required: true %>
+
+      <%= f.button :submit, 'Enviar', class: 'btn btn-primary' %>
+    </div>
+  </div>
 <% end %>
