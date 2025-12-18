@@ -150,3 +150,67 @@
     align-items: flex-start;
   }
 }
+
+body.home, .auth-page {
+
+  .home-banner {
+
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0;
+    margin-top: 0;
+    margin-bottom: 32px;
+
+    /* ✅ melhor responsividade: baseado na ALTURA da viewport */
+    height: clamp(190px, 30vh, 420px);
+
+    @media (max-width: 900px) {
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+      margin-bottom: 20px;
+      height: clamp(180px, 26vh, 320px); /* ajuste fino mobile */
+    }
+  }
+
+  .home-banner__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .home-banner__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.45)
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: clamp(14px, 3vw, 24px);
+  }
+
+  .home-banner__overlay h2 {
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 900px;
+    line-height: 1.22;
+
+    /* ✅ Sass-safe */
+    font-size: clamp(1.05rem, calc(1.2vw + 0.7rem), 1.9rem);
+
+    /* ajuda no mobile */
+    padding: 0 12px;
+  }
+}

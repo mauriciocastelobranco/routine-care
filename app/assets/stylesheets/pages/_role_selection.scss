@@ -178,3 +178,55 @@
 .hidden-submit {
   display: none;
 }
+
+
+.role-page {
+  /* garante que nada corte a largura do banner */
+  width: 100%;
+}
+
+.role-page .home-banner {
+  position: relative;
+
+  /* ✅ força a largura total da viewport mesmo dentro de wrappers */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  overflow: hidden;
+  border-radius: 0;
+
+  /* ✅ altura responsiva (desktop/mobile) */
+  height: clamp(180px, 28vh, 420px);
+  margin-bottom: 24px;
+}
+
+.role-page .home-banner__video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.role-page .home-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.45)
+  );
+}
+
+/* ajuste fino mobile */
+@media (max-width: 600px) {
+  .role-page .home-banner {
+    height: clamp(170px, 24vh, 320px);
+  }
+
+  /* se o foco do vídeo some no mobile, troca o enquadramento */
+  .role-page .home-banner__video {
+    object-position: center top;
+  }
+}
