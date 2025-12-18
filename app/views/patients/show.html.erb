@@ -191,13 +191,10 @@
           <%= simple_form_for [@patient, @care] do |f| %>
             <div class="form-grid">
               <div class="form-field form-field--full">
-                <%= f.input :caregiver_id,
-                  collection: @caregivers,
-                  label: "Selecionar cuidador",
-                  label_method: ->(c) { c.user.name },
-                  include_blank: false,
-                  value_method: :id,
-                  input_html: { class: "form-input" } %>
+                <%= f.input :email,
+                  label: "E-mail do cuidador",
+                  required: true,
+                  input_html: { class: "form-input", placeholder: "ex: cuidador@email.com" } %>
               </div>
             </div>
             <div class="form-actions">
