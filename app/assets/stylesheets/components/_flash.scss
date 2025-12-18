@@ -30,3 +30,21 @@
   border-color: rgba(220, 38, 38, 0.25);
   color: #991B1B;
 }
+
+.notice,
+.flash-notice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 18px;
+  border-radius: 999px; // deixa bem “pill”
+
+  background-color: #e6f4ea; // verde clarinho
+  color: #166534; // verde escuro
+
+  font-weight: 500;
+  font-size: 14px;
+
+  margin: 16px auto; // centraliza horizontalmente
+}
