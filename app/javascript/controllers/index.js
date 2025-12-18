@@ -3,12 +3,5 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
-
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
-import RoleSelectionController from "./role_selection_controller"
-application.register("role-selection", RoleSelectionController)
-
-import ToggleDisplayController from "./toggle_display_controller"
-application.register("toggle-display", ToggleDisplayController)
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)
