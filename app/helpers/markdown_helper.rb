@@ -17,7 +17,7 @@ module MarkdownHelper
 
     sanitize(
       html,
-      tags: %w[p br strong em del a ul ol li blockquote code pre h1 h2 h3 h4 h5 h6 hr table thead tbody tr th td],
+      tags: %w[p br strong em del a ul ol li blockquote code pre h3 h4 h5 h6 hr table thead tbody tr th td],
       attributes: %w[href title]
     )
   end
